@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { useGetAllProductsQuery } from "../../redux/features/products/apis/productApi";
 

@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import { useGetAllProductsQuery } from "../../redux/features/products/apis/productApi";
 
 const Products = () => {
-  const [verifiedProducts, setverifiedProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("products.json")
-      .then((res) => res.json())
-      .then((data) => setverifiedProducts(data));
-  }, []);
+  const {data} = useGetAllProductsQuery(undefined)
+
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-5">
-      {verifiedProducts?.map((product, idx) =>
+      {data?.data?.map((product, idx) =>
         product.isVerified ? (
           <ProductCard product={product} key={idx} />
         ) : undefined
