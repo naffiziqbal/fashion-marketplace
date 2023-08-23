@@ -1,0 +1,33 @@
+nav,
+nav ul li {
+  margin: 0 10px;
+  display: block;
+}
+
+nav ul li ul li {
+  display: none;
+}
+.nested__nav {
+  display: block;
+}
+.nested__nav:hover ul li {
+  display: flex;
+  flex-direction: column;
+  /* top: 100%; */
+  /* left: 50%; */
+  /* width: 100%; */
+  /* background: red; */
+
+  display: block;
+}
+
+input[type="text"],
+select {
+  background: none;
+  padding: 0 3rem;
+}
+
+.user_nav_area ul li {
+  margin: 20 1rem;
+  min-width: 3rem;
+}

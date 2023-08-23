@@ -1,0 +1,28 @@
+.collection {
+  margin: 10% 0;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.collectionBtn {
+  display: flex;
+  width: 208px;
+  padding: 5px 49px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-image: linear-gradient(to top left, #ffffff10, #ffffff1a);
+}
+
+.active {
+  display: flex;
+  width: 208px;
+  padding: 5px 49px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-image: linear-gradient(to top right,#671AE4, #B75CFF) ;
+}
+
+

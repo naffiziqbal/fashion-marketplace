@@ -1,0 +1,25 @@
+.tab-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.tab-buttons button {
+  padding: 8px 16px;
+  background-color: #f1f1f1;
+  border: none;
+  cursor: pointer;
+}
+
+.active-tab {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.inactive-tab {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.tab-content {
+  margin-top: 10px;
+}
