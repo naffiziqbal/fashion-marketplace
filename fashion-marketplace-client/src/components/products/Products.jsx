@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import { useGetAllProductsQuery } from "../../redux/features/products/apis/productApi";
 
 const Products = () => {
-  const [allProductsdata, setAllProductsData] = useState([]);
-
-  useEffect(() => {
-    fetch("products.json")
-      .then((res) => res.json())
-      .then((data) => setAllProductsData(data));
-  }, []);
+  const { data, isError, isLoading } = useGetAllProductsQuery(undefined);
+  console.log(data)
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-5">
-      {allProductsdata?.map((data, idx) => (
+      {data?.data?.map((data, idx) => (
         <ProductCard key={idx} product={data} />
       ))}
     </div>
