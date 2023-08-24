@@ -34,7 +34,7 @@ const ProductCard = (product) => {
                 <FavoriteBorderIcon />
               )}
             </div>
-            <button className="rounded-lg product__btn ">Buy Now</button>
+            <button className="rounded-lg product__btn ">Add To Cart</button>
           </div>
         </div>
       </div>
