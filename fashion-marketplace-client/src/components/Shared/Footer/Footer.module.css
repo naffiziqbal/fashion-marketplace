@@ -1,7 +1,7 @@
 .footer {
   /* flex flex-col lg:flex-row md:flex-row items-center justify-between gap-5 */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   gap: 1.2rem;
 }
@@ -34,14 +34,19 @@
   margin-right: 2rem;
   cursor: pointer;
 }
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .footer {
+    margin: 0 1rem;
     flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 640px) {
   .footer {
+    margin: 0 1rem;
+
     flex-direction: row;
+    flex-wrap: wrap;
   }
 }

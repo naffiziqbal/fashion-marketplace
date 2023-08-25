@@ -1,7 +1,8 @@
 .btn__ghost {
+  width: 10rem;
   font-weight: 400;
-  font-size: 20px;
-  padding: 10px 20px;
+  font-size: 1.2rem;
+  padding: 0.7rem 1rem;
   border-radius: 0.75rem;
   -webkit-border-radius: 1.5rem;
   -moz-border-radius: 0.75rem;
@@ -10,11 +11,12 @@
 }
 .btn {
   font-weight: 600;
-  font-size: 20px;
+  width: 10rem;
+  font-size: 1.2rem;
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
-  padding: 10px 20px;
+  padding: 0.7rem 1rem;
   border-radius: 0.75rem;
-  -webkit-border-radius: 1.5rem;
+  -webkit-border-radius: 0.75rem;
   -moz-border-radius: 0.75rem;
   -ms-border-radius: 0.75rem;
   -o-border-radius: 0.75rem;
@@ -37,4 +39,17 @@
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
   font-size: 20px;
   font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .btn {
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.7rem 0.8rem;
+  }
+  .btn__ghost {
+    font-weight: 400;
+    font-size: 1rem;
+    padding: 0.7rem 0.8rem;
+  }
 }
