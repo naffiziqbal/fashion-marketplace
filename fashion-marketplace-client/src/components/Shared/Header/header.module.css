@@ -1,24 +1,26 @@
-nav,
+nav ul {
+  display: flex;
+  width: 1000%;
+}
 nav ul li {
-  margin: 0 10px;
-  display: block;
+  margin: 0 0.7rem;
+  cursor: pointer;
+}
+nav ul li:hover {
+  color: #0676c0;
 }
 
 nav ul li ul li {
   display: none;
+  position: relative;
+  top: 0;
+  left: 5rem;
+  color: white;
 }
-.nested__nav {
-  display: block;
-}
+
 .nested__nav:hover ul li {
   display: flex;
   flex-direction: column;
-  /* top: 100%; */
-  /* left: 50%; */
-  /* width: 100%; */
-  /* background: red; */
-
-  display: block;
 }
 
 input[type="text"],
@@ -27,7 +29,16 @@ select {
   padding: 0 3rem;
 }
 
-.user_nav_area ul li {
-  margin: 20 1rem;
-  min-width: 3rem;
+.nested__nav li:hover {
+  margin: 0;
+  border-bottom: 1px solid;
+}
+
+.nested__nav li {
+  margin: 0;
+  padding: 1rem;
+}
+
+.nested__nav_ul {
+  position: absolute;
 }
