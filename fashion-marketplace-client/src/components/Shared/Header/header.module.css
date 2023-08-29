@@ -1,7 +1,4 @@
-nav ul {
-  display: flex;
-  width: 1000%;
-}
+
 nav ul li {
   margin: 0 0.7rem;
   cursor: pointer;

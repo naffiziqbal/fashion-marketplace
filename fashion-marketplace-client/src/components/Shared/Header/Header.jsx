@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex justify-between w-full py-5">
       <div className="w-full">
         <button className="font-bold text-3xl">
           <Link to={`/`}>Fashion House</Link>
@@ -26,11 +26,11 @@ const Header = () => {
       <div
         className={`${
           isOpen === true
-            ? "flex flex-col absolute h-full w-full top-24 bg duration-300 mr-0"
-            : "hidden md:flex flex-row  w-full justify-between"
+            ? "flex flex-col absolute w-full top-24 bg-red-300  duration-300 mr-0"
+            : "hidden md:flex flex-row  w-full justify-between items-center"
         } `}
       >
-        <div className=" flex flex-row justify-between flex-nowrap ">
+        <div className=" flex flex-col items-center md:flex-row gap-4 justify-between flex-nowrap ">
           <label htmlFor="searchField">
             <input
               type="text"
@@ -39,7 +39,7 @@ const Header = () => {
             />
           </label>
           <nav className="">
-            <ul className="">
+            <ul className="flex flex-col md:flex-row gap-4 py-5 md:py-0">
               <li>
                 <Link>Home</Link>
               </li>
@@ -47,7 +47,7 @@ const Header = () => {
                 <Link>Explore</Link>
               </li>
               <li>
-                <Link>Personal Collection</Link>
+                <Link>Collections</Link>
               </li>
               <li>
                 <Link>Drops</Link>
