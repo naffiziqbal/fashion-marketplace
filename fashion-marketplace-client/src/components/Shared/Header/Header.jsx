@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import style from "./header.module.css";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import { Avatar } from "@mui/material";
+import { Avatar, Menu, MenuItem } from "@mui/material";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
@@ -13,33 +13,46 @@ const Header = () => {
 
   const handleMenuOpen = (isOpen) => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
-    <div className="flex justify-between w-full py-5">
-      <div className="w-full">
+    <div className="flex w-full py-5">
+      <div className="w-full flex justify-between mx-6">
         <button className="font-bold text-3xl">
           <Link to={`/`}>Fashion House</Link>
         </button>
+        <div
+          className="z-50 block lg:hidden"
+          onClick={() => handleMenuOpen(isOpen)}
+        >
+          {isOpen === true ? <CloseSharpIcon /> : <MenuIcon />}
+        </div>
       </div>
       <div
-        className={`${
-          isOpen === true
-            ? "flex flex-col absolute w-full top-24 bg-red-300  duration-300 mr-0"
-            : "hidden md:flex flex-row  w-full justify-between items-center"
-        } `}
+        className={`${isOpen === true
+          ? "flex flex-col absolute w-full top-24 bg  duration-300 h-full"
+          : "hidden lg:flex flex-row  w-full justify-between items-center"
+          } `}
       >
-        <div className=" flex flex-col items-center md:flex-row gap-4 justify-between flex-nowrap ">
+        <div className=" flex flex-col md: lg:flex-row gap-4 justify-between  mt-5">
           <label htmlFor="searchField">
             <input
               type="text"
               placeholder="Search Items"
-              className="lg:min-w-[358px] min-h-[48px] w-full md:w-52  md:border border-b rounded-none md:rounded-3xl outline-none"
+              className="lg:min-w-[358px] min-h-[48px] w-full md:w-1/2   md:border border-b rounded-none md:rounded-3xl outline-none"
             />
           </label>
           <nav className="">
-            <ul className="flex flex-col md:flex-row gap-4 py-5 md:py-0">
+            <ul className="flex flex-col lg:flex-row gap-4 py-5 md:py-0">
               <li>
                 <Link>Home</Link>
               </li>
@@ -81,22 +94,38 @@ const Header = () => {
                 {" "}
                 <Link>
                   <Avatar
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
                     alt="Remy Sharp"
                     src="/static/images/avatar/1.jpg"
                     sx={{ width: 32, height: 32, background: "#744b32" }}
                   />
+                  <div>
+
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                      <MenuItem onClick={handleClose}>My account</MenuItem>
+                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    </Menu>
+                  </div>
                 </Link>
               </li>
             </ul>
           </nav>
         </div>
       </div>
-      <div
-        className="z-50 block md:hidden"
-        onClick={() => handleMenuOpen(isOpen)}
-      >
-        {isOpen === true ? <CloseSharpIcon /> : <MenuIcon />}
-      </div>
+
     </div>
   );
 };

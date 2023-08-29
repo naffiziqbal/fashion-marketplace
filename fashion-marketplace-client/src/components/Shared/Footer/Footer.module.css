@@ -1,5 +1,5 @@
 .footer {
-  /* flex flex-col lg:flex-row md:flex-row items-center justify-between gap-5 */
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
