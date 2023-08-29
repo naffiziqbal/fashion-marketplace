@@ -1,6 +1,7 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState } from "react";
+import AddToCart from "../ui/cart/AddToCart";
 const ProductCard = (product) => {
   const { image, name, creator_name, price, isVerified } = product.product;
   console.log(isVerified);
@@ -25,7 +26,7 @@ const ProductCard = (product) => {
             </div>
           </div>
           <p className="my-3">{name}</p>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-evenly items-center">
             {/* Wishlisht Button */}
             <div onClick={() => handleWishLisht(!wishlist)}>
               {wishlist === true ? (
@@ -34,7 +35,7 @@ const ProductCard = (product) => {
                 <FavoriteBorderIcon />
               )}
             </div>
-            <button className="rounded-lg product__btn ">Add To Cart</button>
+            <AddToCart />
           </div>
         </div>
       </div>

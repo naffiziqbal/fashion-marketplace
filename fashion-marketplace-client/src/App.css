@@ -1,5 +1,5 @@
 .btn__ghost {
-  width: 10rem;
+  min-width: 10rem;
   font-weight: 400;
   font-size: 1.2rem;
   padding: 0.7rem 1rem;
@@ -11,10 +11,10 @@
 }
 .btn {
   font-weight: 600;
-  width: 10rem;
+  min-width: 10rem;
   font-size: 1.2rem;
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
-  padding: 0.7rem 1rem;
+  padding: 0.7rem 0.7rem;
   border-radius: 0.75rem;
   -webkit-border-radius: 0.75rem;
   -moz-border-radius: 0.75rem;
@@ -34,10 +34,10 @@
 
 .product__btn {
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
-  width: 75%;
+  min-width: 75%;
   padding: 0.75rem 1.5rem;
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: 600;
 }
 
