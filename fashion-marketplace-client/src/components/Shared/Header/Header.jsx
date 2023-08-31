@@ -116,7 +116,11 @@ const Header = () => {
                     >
                       <MenuItem onClick={handleClose}>Profile</MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
-                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <Link to={'/signup'}>
+                          Sign Up
+                        </Link>
+                      </MenuItem>
                     </Menu>
                   </div>
                 </Link>
