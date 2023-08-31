@@ -4,7 +4,6 @@ import Loading from "../ui/loading/Loading";
 
 const Products = () => {
   const { data, isLoading } = useGetAllProductsQuery(undefined);
-  console.log(data);
   let content;
 
   if (isLoading) {

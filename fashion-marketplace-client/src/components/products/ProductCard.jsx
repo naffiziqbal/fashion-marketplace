@@ -4,12 +4,10 @@ import { useState } from "react";
 import AddToCart from "../ui/cart/AddToCart";
 const ProductCard = (product) => {
   const { image, name, creator_name, price, isVerified } = product.product;
-  console.log(isVerified);
 
   const [wishlist, setWishLisht] = useState(false);
   const handleWishLisht = (wishlist) => {
     setWishLisht(wishlist);
-    console.log(wishlist);
   };
   return (
     <div className="flex justify-center items-center">

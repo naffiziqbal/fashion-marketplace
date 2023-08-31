@@ -9,12 +9,6 @@ const Signup = () => {
     // const [month, setMonth] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const handleFormSubmit = (data) => {
-        console.log(data)
-    }
-    // const handleChange = () => {
-    //     setMonth(month)
-    // }
 
     return (
         <div className={style}>
@@ -32,7 +26,7 @@ const Signup = () => {
                                 <p className="text-[1.1rem] mt-6">Already a Member?<span className="text-primary"> <Link>Sign in</Link></span> </p>
                             </div>
                             <div className="mt-[3rem]  m-8">
-                                <form onSubmit={handleSubmit(handleFormSubmit)}>
+                                <form onSubmit={handleSubmit()}>
                                     <div>
                                         <label>
                                             <input type="email"

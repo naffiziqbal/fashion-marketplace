@@ -3,6 +3,8 @@ import Home from "../pages/Home";
 import App from "../App";
 import Signup from "../pages/Signup";
 import Profile from "../pages/Profile";
+import ProtectedRoutes from "./routerComponent/ProtectedRoutes";
+// import ProtectedRoutes from "./protectedRoutes";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/user-profile",
-        element: <Profile />
+        element: <ProtectedRoutes>
+          <Profile />
+        </ProtectedRoutes>
+
+
       },
     ],
 

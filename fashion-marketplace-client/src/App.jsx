@@ -12,7 +12,7 @@ function App() {
   return (
     <div
       style={{
-        "background-image": "linear-gradient(to right,#873d38,#181e41 )",
+        "backgroundImage": "linear-gradient(to right,#873d38,#181e41 )",
       }}
     >
 
