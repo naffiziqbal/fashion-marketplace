@@ -6,6 +6,7 @@ import { Avatar, Menu, MenuItem } from "@mui/material";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,8 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
 
   return (
     <div className="flex w-full py-5">
@@ -100,7 +103,7 @@ const Header = () => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                     alt="Remy Sharp"
-                    src="/static/images/avatar/1.jpg"
+                    src={user?.picture}
                     sx={{ width: 32, height: 32, background: "#744b32" }}
                   />
                   <div>
@@ -114,12 +117,22 @@ const Header = () => {
                         'aria-labelledby': 'basic-button',
                       }}
                     >
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <Link to={'/user-profile'}>
+                          Profile
+                        </Link>
+                      </MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>
-                        <Link to={'/signup'}>
-                          Sign Up
-                        </Link>
+                        {!isAuthenticated ?
+                          <button
+                            onClick={() => loginWithRedirect()}
+                          > Login</button>
+                          : <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                            Log Out
+                          </button>
+                        }
+
                       </MenuItem>
                     </Menu>
                   </div>
@@ -130,7 +143,7 @@ const Header = () => {
         </div>
       </div>
 
-    </div>
+    </div >
   );
 };
 
