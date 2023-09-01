@@ -50,6 +50,7 @@ const CreateProduct = () => {
                             if (data !== "Failed") {
                                 alert('Product Created')
                                 reset()
+                                closeModal()
                             }
                         }).catch(err => err.message)
                 }
@@ -59,13 +60,18 @@ const CreateProduct = () => {
     }
     return (
         <div className="min-h-screen flex flex-col items-center">
-            <div><h3>Become a Creator</h3>
+            <div>
+                <h3>Become a Creator</h3>
                 <button className="btn" onClick={openModel}>Create Product</button>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa illum facilis esse deleniti sed modi eos natus animi placeat harum enim cum quo, a eum expedita commodi accusamus omnis dignissimos pariatur qui accusantium nulla quibusdam odit odio. Ut nesciunt rem sapiente at saepe quis, itaque ipsum? Provident quis aut aperiam sequi. Quasi asperiores maiores a voluptates tenetur quaerat autem facilis. Inventore ut, veritatis iure consequuntur distinctio culpa quo eligendi ducimus neque deleniti nulla quod accusantium facere aspernatur soluta odio numquam suscipit pariatur. Iste alias deserunt fugit ipsum labore sed expedita excepturi et aliquid consectetur minima laudantium assumenda in quidem atque eligendi veritatis ullam, ab id corporis? Veniam explicabo laboriosam soluta vero itaque non porro. Tempore doloremque facere sapiente animi esse architecto magnam rem. Pariatur, voluptatum dicta! Iste cupiditate fuga illum esse similique fugit blanditiis eos optio praesentium quibusdam quod eveniet quaerat, magnam quasi eum. Quae fugit assumenda fugiat repellendus explicabo eos quo quisquam distinctio placeat, ducimus blanditiis harum amet nulla, voluptate totam ex cumque dolorum corporis modi quasi dolores quod aliquam. Ratione vel deleniti vitae natus fuga, dolorem dolor labore eligendi ipsum beatae officia numquam delectus voluptatibus ducimus totam nemo ipsam aliquid praesentium odit, quos consectetur, eius debitis. Dicta, enim!</p>
+            </div>
+            <div className="absolute">
                 <CreateProductModal
                     isOpen={isModalOpen}
                     onClose={closeModal}
                     onSubmit={handleSubmit}
-                /></div>
+                />
+            </div>
         </div>
     );
 };

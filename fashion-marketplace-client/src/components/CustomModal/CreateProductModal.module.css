@@ -1,0 +1,22 @@
+    .image-upload {
+        text-align: center;
+        margin: 1rem;
+    }
+
+    .custom-file-upload {
+        display: inline-block;
+        padding: .7rem 1.5rem;
+        background-color: #0084ff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    #image-preview {
+        max-width: 100%;
+        max-height: 15rem;
+        margin-top: 10px;
+    }
+
+    button {
+        margin: 1rem 0;
+    }
