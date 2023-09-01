@@ -4,6 +4,7 @@ import App from "../App";
 import Signup from "../pages/Signup";
 import Profile from "../pages/Profile";
 import ProtectedRoutes from "./routerComponent/ProtectedRoutes";
+import CreateProduct from "../pages/CreateProduct";
 // import ProtectedRoutes from "./protectedRoutes";
 
 const router = createBrowserRouter([
@@ -20,9 +21,10 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes>
           <Profile />
         </ProtectedRoutes>
-
-
-      },
+      },{
+        path : '/create-product',
+        element : <CreateProduct/>
+      }
     ],
 
   },

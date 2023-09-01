@@ -7,7 +7,7 @@ function App() {
 
   const { getAccessTokenSilently, isAuthenticated, user, getAccessTokenWithPopup } = useAuth0();
 
-  user && isAuthenticated ? getAccessTokenSilently() : getAccessTokenWithPopup()
+  // user && isAuthenticated ? getAccessTokenSilently() : getAccessTokenWithPopup()
 
   return (
     <div
@@ -15,8 +15,6 @@ function App() {
         "backgroundImage": "linear-gradient(to right,#873d38,#181e41 )",
       }}
     >
-
-
       <MainLayout />
     </div>
   );

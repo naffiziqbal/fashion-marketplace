@@ -63,7 +63,7 @@ const Header = () => {
                 <Link>Explore</Link>
               </li>
               <li>
-                <Link>Collections</Link>
+                <Link to={'/create-product'}>Create Products</Link>
               </li>
               <li>
                 <Link>Drops</Link>

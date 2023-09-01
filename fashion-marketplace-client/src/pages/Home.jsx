@@ -17,7 +17,7 @@ const Home = () => {
       <BrandSection />
       <AboutSection />
       <CollectionsInfo />
-      <CollectionFillterButtons/>
+      <CollectionFillterButtons />
     </div>
   );
 };

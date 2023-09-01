@@ -3,8 +3,10 @@ import { createProductToDb, getAllProductsFromDb } from "./user.services";
 
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const data = req.body;
-    const result = await createProductToDb(data);
+    const  product  = req.body;
+    
+    console.log(product);
+    const result = await createProductToDb(product);
     res.status(200).json({
       success: true,
       data: result,
