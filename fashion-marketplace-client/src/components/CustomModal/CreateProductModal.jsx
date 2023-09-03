@@ -33,7 +33,7 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
 
     return (
         <div className={style}>
-            <div className="custom-modal  rounded-xl min-w-[30rem] bg-white text-black shadow-2xl  min-h-[40rem] z-50">
+            <div className=" rounded-xl w-full bg g-[#c2c2c2c5] text-white shadow-2xl  z-50">
                 <div className="m-4 flex flex-col">
                     <h2 className="py-6 font-extrabold text-2xl text-center ">Enter Product Details</h2>
 
@@ -64,7 +64,6 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
                     <textarea
                         placeholder="Product Description"
                         {...register('desription')}
-                        className="border border-black my-3 p-1 rounded-sm"
 
                     />
                     <input
@@ -75,7 +74,7 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
                     />
                     <div className="flex justify-around">
                         <button className="btn text-white" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
-                        <button className="btn__ghost border border-black" onClick={onClose}>Cancel</button>
+                        <button className="btn__ghost border " onClick={onClose}>Cancel</button>
                     </div>
                 </div>
 
