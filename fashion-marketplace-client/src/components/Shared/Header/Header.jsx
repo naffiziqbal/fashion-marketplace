@@ -1,17 +1,21 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { Link, useLocation } from "react-router-dom";
 import style from "./header.module.css";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { Avatar, Menu, MenuItem } from "@mui/material";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import MenuIcon from "@mui/icons-material/Menu";
-import {useState } from "react";
+import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+
+import Search from "../search/Search";
+
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
-  const location = useLocation()
 
 
 
@@ -19,7 +23,6 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -28,9 +31,7 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // if(location.pathname) return false
 
-  if(location)
 
   return (
     <div className="flex w-full py-5">
@@ -52,13 +53,7 @@ const Header = () => {
           } `}
       >
         <div className=" flex flex-col md: lg:flex-row gap-4 justify-between  mt-5 mx-16 lg:items-center">
-          <label htmlFor="searchField">
-            <input
-              type="text"
-              placeholder="Search Items"
-              className="lg:min-w-[358px] min-h-[48px] w-full md:w-1/2   md:border border-b rounded-none md:rounded-3xl outline-none"
-            />
-          </label>
+          <Search />
           <nav className="">
             <ul className="flex flex-col lg:flex-row gap-4 py-5 md:py-0">
               <li>
@@ -147,7 +142,6 @@ const Header = () => {
           </nav>
         </div>
       </div>
-
     </div >
   );
 };
