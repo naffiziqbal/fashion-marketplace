@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import App from "../App";
 import Signup from "../pages/Signup";
+import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import ProtectedRoutes from "./routerComponent/ProtectedRoutes";
 import CreateProduct from "../pages/CreateProduct";
@@ -21,9 +22,9 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes>
           <Profile />
         </ProtectedRoutes>
-      },{
-        path : '/create-product',
-        element : <CreateProduct/>
+      }, {
+        path: '/create-product',
+        element: <CreateProduct />
       }
     ],
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />
+  },
+  {
+    path: "/login",
+    element: <Login />
   },
 
 

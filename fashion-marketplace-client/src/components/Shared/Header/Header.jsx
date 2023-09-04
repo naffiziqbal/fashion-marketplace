@@ -125,15 +125,14 @@ const Header = () => {
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>
                         {!isAuthenticated ?
-                          <button
-                            onClick={() => loginWithRedirect()}
-                          > Login</button>
-                          : <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                          <Link to={'/login'}>Login</Link>
+                          : <button>
                             Log Out
                           </button>
                         }
 
                       </MenuItem>
+
                     </Menu>
                   </div>
                 </Link>

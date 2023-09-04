@@ -15,11 +15,11 @@
   font-size: 1.2rem;
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
   padding: 0.7rem 0.7rem;
-  border-radius: 0.75rem;
-  -webkit-border-radius: 0.75rem;
-  -moz-border-radius: 0.75rem;
-  -ms-border-radius: 0.75rem;
-  -o-border-radius: 0.75rem;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  -ms-border-radius: 2rem;
+  -o-border-radius: 2rem;
 }
 
 .transparent__bg {

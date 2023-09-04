@@ -29,7 +29,7 @@ const Signup = () => {
                         <div className="md:min-h-[36rem] md:min-w-[34rem]  bg-[#ffffff20]  rounded-xl pl-8 m-6">
                             <div>
                                 <h3 className="text-3xl font-extrabold mt-6  tracking-widest">Sign Up</h3>
-                                <p className="text-[1.1rem] mt-6">Already a Member?<span className="text-primary"> <Link>Sign in</Link></span> </p>
+                                <p className="text-[1.1rem] mt-6">Already a Member?<span className="text-primary"> <Link to={'/login'}>Log In</Link></span> </p>
                             </div>
                             <div className="mt-[3rem]  m-8">
                                 <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -38,23 +38,25 @@ const Signup = () => {
                                             <input type="email"
                                                 {...register('email')}
                                                 placeholder="Email Address" />
+                                            {errors.email && <p>{errors.email}</p>}
                                         </label>
                                         <div className="flex flex-row gap-5">
 
                                             <input type="text"
                                                 {...register('fullName')}
                                                 placeholder="Full Name" />
-
+                                            {errors.email && <p>{errors.email}</p>}
 
                                             <input type="text"
                                                 {...register('lastName')}
                                                 placeholder="Last Name" />
-
+                                            {errors.email && <p>{errors.email}</p>}
                                         </div>
                                         <label>
                                             <input type="password"
                                                 {...register('password')}
                                                 placeholder="Password" />
+                                            {errors.password && <p>{errors.password}</p>}
                                         </label> <br />
                                         <label htmlFor="dob">
                                             Date Of Birth
@@ -78,10 +80,12 @@ const Signup = () => {
                                                 <input type="text"
                                                     {...register('day')}
                                                     placeholder="Day" />
+                                                {errors.day && <p>{errors.day}</p>}
                                                 <input type="number"
                                                     {...register('year')}
 
                                                     placeholder="Year" />
+                                                {errors.year && <p>{errors.year}</p>}
                                             </div>
                                         </label>
                                     </div>
