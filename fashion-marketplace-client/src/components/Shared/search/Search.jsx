@@ -32,19 +32,22 @@ const Search = () => {
         content = ''
     }
     return (
-        <div className={style}>
-            <label htmlFor="searchField">
-                <input
-                    type="text"
-                    name="search"
-                    placeholder="Search Items"
-                    className="lg:min-w-[358px] min-h-[48px] w-full md:w-1/2 md:border border-b rounded-none md:rounded-3xl outline-none"
-                    onChange={handleSearch}
-                    value={searchQuery}
-                />
-            </label>
+        <div className={style.search}>
+            <div>
+                <label htmlFor="searchField">
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search Items"
+                        className="lg:min-w-[358px] min-h-[48px] w-full md:w-1/2 md:border border-b rounded-none md:rounded-3xl outline-none"
+                        onChange={handleSearch}
+                        value={searchQuery}
+                    />
 
-            <div className='absolute  z-50 w-full overflow-scroll overflow-x-hidden  h-[24rem]'>
+                </label>
+            </div>
+
+            <div className='absolute z-50 w-full overflow-scroll overflow-x-hidden max-h-[24rem]'>
                 {content}
             </div>
 
