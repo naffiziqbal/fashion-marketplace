@@ -1,20 +1,41 @@
 // import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logIn, setLoading } from "../redux/features/user/userSlice";
+import useUserInfo from "../hooks/useUserInfo";
 
 const Signup = () => {
+    const dispatch = useDispatch()
     // const [month, setMonth] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { isLoading } = useSelector(state => state.user)
+    const navigate = useNavigate()
+
+
+    console.log(isLoading)
+    const user = useUserInfo()
+    const uid = user?.uid
+    console.log(uid)
+
 
     const handleFormSubmit = (data) => {
-        console.log(data)
+        const email = data.email;
+        const password = data.password
+        //**Login Action From Redux 
+        dispatch(logIn({ email, password }))
+        setLoading(true)
+
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+
     }
-    // const handleChange = () => {
-    //     setMonth(month)
-    // }
+    
+    if (uid) return navigate('/')
 
     return (
         <div className={style}>
@@ -48,7 +69,9 @@ const Signup = () => {
                                         </label>
                                     </div>
                                     <div className="flex justify-end mt-20">
-                                        <input className="btn cursor-pointer" type="submit" value="Log In" />
+                                        {
+                                            isLoading ? "Loading....." : <input className="btn cursor-pointer" type="submit" value="Log In" />
+                                        }
                                     </div>
                                 </form>
                             </div>

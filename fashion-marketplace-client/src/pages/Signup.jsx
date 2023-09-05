@@ -1,16 +1,35 @@
 // import { useState } from "react";
+import { useDispatch } from "react-redux";
 import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
 import { Link } from "react-router-dom";
+import { createUser } from "../redux/features/user/userSlice";
 
 const Signup = () => {
     // const [month, setMonth] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const dispatch = useDispatch()
+
     const handleFormSubmit = (data) => {
-        console.log(data)
+        const email = data.email;
+        const password = data.password;
+        const FName = data.FName
+        const LName = data.LName
+        const displayName = { FName, LName }
+        const DOB = {
+            month: data.month,
+            day: data.day,
+            year: data.year,
+        }
+        const user = {
+            email, password, displayName, DOB
+        }
+
+
+        dispatch(createUser(user))
     }
     // const handleChange = () => {
     //     setMonth(month)
@@ -43,14 +62,14 @@ const Signup = () => {
                                         <div className="flex flex-row gap-5">
 
                                             <input type="text"
-                                                {...register('fullName')}
+                                                {...register('FName')}
                                                 placeholder="Full Name" />
-                                            {errors.email && <p>{errors.email}</p>}
+                                            {errors.Fname && <p>{errors.Fname}</p>}
 
                                             <input type="text"
-                                                {...register('lastName')}
+                                                {...register('LName')}
                                                 placeholder="Last Name" />
-                                            {errors.email && <p>{errors.email}</p>}
+                                            {errors.Lname && <p>{errors.Lname}</p>}
                                         </div>
                                         <label>
                                             <input type="password"
@@ -77,7 +96,7 @@ const Signup = () => {
                                                     <option value="November">November</option>
                                                     <option value="December">December</option>
                                                 </select>
-                                                <input type="text"
+                                                <input type="number"
                                                     {...register('day')}
                                                     placeholder="Day" />
                                                 {errors.day && <p>{errors.day}</p>}

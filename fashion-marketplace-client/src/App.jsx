@@ -1,13 +1,19 @@
+
 import "./App.css";
 import MainLayout from "./components/Shared/Layout/MainLayout";
-import { useAuth0 } from '@auth0/auth0-react';
+import useUserInfo from "./hooks/useUserInfo";
+// import { useAuth0 } from '@auth0/auth0-react';
+
 
 function App() {
 
 
-  const { getAccessTokenSilently, isAuthenticated, user, getAccessTokenWithPopup } = useAuth0();
+  // const { getAccessTokenSilently, isAuthenticated, user, getAccessTokenWithPopup } = useAuth0();
 
   // user && isAuthenticated ? getAccessTokenSilently() : getAccessTokenWithPopup()
+
+  useUserInfo()
+
 
   return (
     <div

@@ -10,6 +10,10 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Search from "../search/Search";
+import { useSelector } from "react-redux";
+import useUserInfo from "../../../hooks/useUserInfo";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../lib/firebase";
 
 
 const Header = () => {
@@ -17,6 +21,7 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
 
+  const { uid } = useUserInfo()
 
 
   const handleMenuOpen = (isOpen) => {
@@ -31,6 +36,13 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {
+        alert("logged Out")
+      })
+  }
 
 
   return (
@@ -124,9 +136,9 @@ const Header = () => {
                       </MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>
-                        {!isAuthenticated ?
+                        {!uid ?
                           <Link to={'/login'}>Login</Link>
-                          : <button>
+                          : <button onClick={handleLogOut}>
                             Log Out
                           </button>
                         }
