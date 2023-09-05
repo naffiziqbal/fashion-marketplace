@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 
@@ -9,6 +10,7 @@ const initialState = {
   isLoading: false,
   userInfo: {
     email: {},
+    name: {},
   },
   isError: false,
   success: false,
@@ -27,6 +29,16 @@ export const logIn = createAsyncThunk(
   async ({ email, password }) => {
     const data = await signInWithEmailAndPassword(auth, email, password);
     return data.user.email;
+  }
+);
+export const updateUserProfile = createAsyncThunk(
+  "user/updateProfile",
+  async (user) => {
+    const udisplayName = user.displayName;
+    const udata = await updateProfile(auth.currentUser, {
+      displayName: udisplayName,
+    });
+    return udata;
   }
 );
 
@@ -74,6 +86,18 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.error = action.error.message;
+        state.error = action.error.stack;
+      })
+      //update User
+      .addCase(updateUserProfile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.isLoading = true;
+        state.userInfo.name = action.payload;
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.error.stack;
       });
   },

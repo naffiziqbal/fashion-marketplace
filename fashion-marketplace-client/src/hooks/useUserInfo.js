@@ -25,6 +25,7 @@ const useUserInfo = () => {
       }
       return setUserData(user);
     });
+
   }, [dispatch, navigate]);
   return userData;
 };

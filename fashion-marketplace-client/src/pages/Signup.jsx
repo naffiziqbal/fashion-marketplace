@@ -1,11 +1,14 @@
 // import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
 import { Link } from "react-router-dom";
-import { createUser } from "../redux/features/user/userSlice";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../lib/firebase";
+import { createUser, updateUserProfile } from "../redux/features/user/userSlice";
+
 
 const Signup = () => {
     // const [month, setMonth] = useState('')
@@ -13,12 +16,14 @@ const Signup = () => {
 
     const dispatch = useDispatch()
 
+
+
     const handleFormSubmit = (data) => {
         const email = data.email;
         const password = data.password;
         const FName = data.FName
         const LName = data.LName
-        const displayName = { FName, LName }
+        const displayName = FName + " " + LName
         const DOB = {
             month: data.month,
             day: data.day,
@@ -30,6 +35,9 @@ const Signup = () => {
 
 
         dispatch(createUser(user))
+
+        dispatch(updateUserProfile(user))
+
     }
     // const handleChange = () => {
     //     setMonth(month)
