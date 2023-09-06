@@ -4,20 +4,21 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useForm } from "react-hook-form";
 import style from "./CreateProductModal.module.css";
 import { useEffect, useState } from "react";
+import useUserInfo from "../../../hooks/useUserInfo";
 
 const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
     const [selectedImage, setSelectedImage] = useState(null);
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { displayName } = useUserInfo()
 
-    const { user } = useAuth0()
-    const userName = user?.email.slice(0, 7).replace(/\./g, '')
 
+    // Submit Modal data 
     const handleFormSubmit = (data) => {
         onSubmit(data, reset)
     }
     if (!isOpen) return null
 
+    // Show Image on Selection Field
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -69,7 +70,7 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
                     <input
                         type="text"
                         placeholder="Author Name"
-                        value={userName}
+                        value={displayName}
                         {...register("creator_Name")}
                     />
                     <div className="flex justify-around">

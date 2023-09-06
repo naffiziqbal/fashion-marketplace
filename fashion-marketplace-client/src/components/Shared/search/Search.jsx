@@ -32,7 +32,7 @@ const Search = () => {
         content = ''
     }
     return (
-        <div className={style.search}>
+        <div className={style?.search}>
             <div>
                 <label htmlFor="searchField">
                     <input

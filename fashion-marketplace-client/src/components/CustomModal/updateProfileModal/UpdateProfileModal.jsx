@@ -5,18 +5,19 @@ import { useForm } from "react-hook-form";
 import style from "./UpdateProductModal.module.css";
 import { useEffect, useState } from "react";
 
-const UpdateProductModal = ({ isOpen, onClose, onSubmit }) => {
+const UpdateUserModal = ({ isOpen, onClose, onSubmit }) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const [selectedImage, setSelectedImage] = useState(null);
 
 
+    // Submit Form Data
     const handleFormSubmit = (data) => {
-        console.log(data)
         onSubmit(data, reset)
     }
     if (!isOpen) return null
 
+    //Show Image in Input Field
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -72,4 +73,4 @@ const UpdateProductModal = ({ isOpen, onClose, onSubmit }) => {
     );
 };
 
-export default UpdateProductModal;
+export default UpdateUserModal;

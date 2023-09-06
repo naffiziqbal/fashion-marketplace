@@ -12,9 +12,9 @@ const Products = () => {
   }
 
   if (data) {
-    content = data?.data?.map((data, idx) => (
-      <ProductCard key={idx} product={data} />
-    ));
+    const pdata = data?.data?.filter(data => data?.isVerified)
+    content = pdata?.map(product => <ProductCard product={product} key={product?._id} />)
+
   }
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-5">

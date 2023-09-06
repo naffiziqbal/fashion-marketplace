@@ -3,12 +3,16 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState } from "react";
 import AddToCart from "../ui/cart/AddToCart";
 const ProductCard = (product) => {
-  const { image, name, creator_name, price, isVerified } = product.product;
+  console.log(product.product)
+  const { image, name, creator_name, price } = product.product;
 
   const [wishlist, setWishLisht] = useState(false);
+
+  // Add Data To Wishlist
   const handleWishLisht = (wishlist) => {
     setWishLisht(wishlist);
   };
+
   return (
     <div className="flex justify-center items-center">
       <div className="border p-3 transparent__bg rounded-xl  hover:border-primary hover:duration-500 bg-[#46464617]">

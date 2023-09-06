@@ -1,11 +1,9 @@
 import useUserInfo from "../hooks/useUserInfo";
-import { useForm } from 'react-hook-form'
 import EditIcon from '@mui/icons-material/Edit';
-import { useSelector } from "react-redux";
-import UpdateProductModal from "../components/CustomModal/updateProfileModal/updateProfileModal";
 import { useState } from "react";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../lib/firebase";
+import UpdateUserModal from "../components/CustomModal/updateProfileModal/updateProfileModal";
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,8 +62,9 @@ const Profile = () => {
                         onClick={handleModal}
                         className=""><EditIcon /></button>
                 </div>
+                {/* Update User  Modal  */}
                 <div className="flex justify-center items-center">
-                    <UpdateProductModal
+                    <UpdateUserModal
                         isOpen={isModalOpen}
                         onClose={closeModal}
                         onSubmit={handleSubmit} />
