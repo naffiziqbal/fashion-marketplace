@@ -17,18 +17,25 @@ const initialState = {
   error: null,
 };
 export const createUser = createAsyncThunk("user/createuser", async (user) => {
-  const email = user.email;
-  const password = user.password;
-  const data = await createUserWithEmailAndPassword(auth, email, password);
-  console.log(data.user);
-  return data.user.email;
+  try {
+    const email = user.email;
+    const password = user.password;
+    const data = await createUserWithEmailAndPassword(auth, email, password);
+    return data.user.email;
+  } catch (err) {
+    alert(err.message);
+  }
 });
 
 export const logIn = createAsyncThunk(
   "user/login",
   async ({ email, password }) => {
-    const data = await signInWithEmailAndPassword(auth, email, password);
-    return data.user.email;
+    try {
+      const data = await signInWithEmailAndPassword(auth, email, password);
+      return data.user.email;
+    } catch (err) {
+      alert(err.message);
+    }
   }
 );
 export const updateUserProfile = createAsyncThunk(
@@ -69,7 +76,6 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.error = action.error.message;
-        state.error = action.error.stack;
       })
       // Login User
       .addCase(logIn.pending, (state) => {
@@ -86,7 +92,6 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.error = action.error.message;
-        state.error = action.error.stack;
       })
       //update User
       .addCase(updateUserProfile.pending, (state) => {

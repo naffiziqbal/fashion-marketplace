@@ -1,19 +1,22 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    // const { user, isAuthenticated, isLoading } = useAuth0();
+    const { userInfo } = useSelector(state => state.user)
+    console.log(userInfo)
+    const { email, displayName, photoUrl } = userInfo
 
-    if (isLoading) {
-        return <div>Loading ...</div>;
-    }
+    // if (isLoading) {
+    //     return <div>Loading ...</div>;
+    // }
 
     return (
         <div className="min-h-screen">
-            {isAuthenticated ? (
+            {userInfo ? (
                 <div >
-                    <img className="w-52" src={user.picture} alt={user.name} />
-                    <h2>{user.name}</h2>
-                    <p>{user.email}</p>
+                    <img className="w-52" src={photoUrl} alt={displayName} />
+                    <h2>{displayName}</h2>
+                    <p>{email}</p>
                 </div>
             ) : <> No User Found</>}
 

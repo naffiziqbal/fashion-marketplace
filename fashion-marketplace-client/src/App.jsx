@@ -13,8 +13,7 @@ function App() {
   // user && isAuthenticated ? getAccessTokenSilently() : getAccessTokenWithPopup()
 
   useUserInfo()
-  const user = auth.currentUser;
-  console.log(user)
+  // const user = auth.currentUser;
   return (
     <div
       style={{
