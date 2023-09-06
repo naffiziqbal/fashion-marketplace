@@ -1,0 +1,52 @@
+.image-upload {
+  text-align: center;
+  margin: 1rem;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background-color: #0084ff;
+  color: #fff;
+  cursor: pointer;
+}
+
+#image-preview {
+  width: 100%;
+  max-width: 500px;
+  max-height: 15rem;
+  margin-top: 10px;
+}
+
+button {
+  margin: 1rem 0;
+}
+
+textarea {
+  background: none;
+  border: 1px solid white;
+  margin: 1rem 0;
+  min-height: 12rem;
+  min-width: 25rem;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+input::file-selector-button {
+  width: 100%;
+  cursor: pointer;
+  height: 2rem;
+  background-image: linear-gradient(to top right, #671ae4, #b75cff);
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}

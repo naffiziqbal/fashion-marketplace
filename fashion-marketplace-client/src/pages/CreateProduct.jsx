@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CreateProductModal from "../components/CustomModal/CreateProductModal";
+import CreateProductModal from "../components/CustomModal/createProductModal/CreateProductModal";
 import { useAuth0 } from "@auth0/auth0-react";
 import img from '../assets/images/signupImg.png'
 
@@ -11,6 +11,7 @@ const CreateProduct = () => {
 
     const { user } = useAuth0()
     const userName = user?.email.slice(0, 7).replace(/\./g, '')
+    
     const handleSubmit = (data, reset) => {
 
         const imgData = data.image[0];

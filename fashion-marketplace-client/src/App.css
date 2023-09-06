@@ -1,5 +1,5 @@
 .btn__ghost {
-  min-width: 10rem;
+  min-width: 8rem;
   font-weight: 400;
   font-size: 1.2rem;
   padding: 0.7rem 1rem;
@@ -11,7 +11,7 @@
 }
 .btn {
   font-weight: 600;
-  min-width: 10rem;
+  min-width: 8rem;
   font-size: 1.2rem;
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
   padding: 0.7rem 0.7rem;
