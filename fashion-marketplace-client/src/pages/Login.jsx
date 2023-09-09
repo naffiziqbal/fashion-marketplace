@@ -4,7 +4,7 @@ import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import { logIn, setLoading } from "../redux/features/user/userSlice";
 import useUserInfo from "../hooks/useUserInfo";
 
@@ -16,10 +16,8 @@ const Signup = () => {
     const navigate = useNavigate()
 
 
-    console.log(isLoading)
     const user = useUserInfo()
     const uid = user?.uid
-    console.log(uid)
 
 
     const handleFormSubmit = (data) => {
@@ -27,6 +25,7 @@ const Signup = () => {
         const password = data.password
         //**Login Action From Redux 
         dispatch(logIn({ email, password }))
+        
         setLoading(true)
 
         setTimeout(() => {
@@ -34,8 +33,8 @@ const Signup = () => {
         }, 3000)
 
     }
-    
-    if (uid) return navigate('/')
+
+    // if (uid) return navigate('/')
 
     return (
         <div className={style}>

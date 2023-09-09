@@ -32,6 +32,18 @@ export const logIn = createAsyncThunk(
   async ({ email, password }) => {
     try {
       const data = await signInWithEmailAndPassword(auth, email, password);
+      fetch("http://localhost:5000/api/v1/user/jwt", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          localStorage.setItem("accessToken", data.token);
+        });
       return data.user.email;
     } catch (err) {
       alert(err.message);
