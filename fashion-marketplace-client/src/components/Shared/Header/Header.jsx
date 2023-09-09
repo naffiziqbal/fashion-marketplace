@@ -14,14 +14,15 @@ import { useSelector } from "react-redux";
 import useUserInfo from "../../../hooks/useUserInfo";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
+import logo from "../../../assets/logo.png"
 
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { loginWithRedirect, isAuthenticated, logout, user } = useAuth0();
 
-  const { uid } = useUserInfo()
+
+  const user = useUserInfo()
 
 
   const handleMenuOpen = (isOpen) => {
@@ -46,11 +47,15 @@ const Header = () => {
 
 
   return (
-    <div className="flex w-full py-5">
-      <div className="w-full lg:w-auto  flex justify-between mx-6">
-        <button className="font-bold text-3xl text-primary">
-          <Link to={`/`}>FashionHouse</Link>
-        </button>
+    <div className="flex lg:items-center w-full py-5">
+      <div className="w-full lg:w-auto  flex justify-between items-center mx-6">
+        <div className="flex items-center">
+          <Link to={`/`}>
+            <figure className=" w-52 border">
+              <img src={logo} alt="" />
+            </figure>
+          </Link>
+        </div>
         <div
           className="z-50 block lg:hidden"
           onClick={() => handleMenuOpen(isOpen)}
@@ -115,7 +120,7 @@ const Header = () => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                     alt="Remy Sharp"
-                    src={user?.picture}
+                    src={user?.photoURL}
                     sx={{ width: 32, height: 32, background: "#744b32" }}
                   />
                   <div>
@@ -136,7 +141,7 @@ const Header = () => {
                       </MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>
-                        {!uid ?
+                        {!user?.uid ?
                           <Link to={'/login'}>Login</Link>
                           : <button onClick={handleLogOut}>
                             Log Out

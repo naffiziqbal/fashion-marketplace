@@ -3,7 +3,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useState } from "react";
 import AddToCart from "../ui/cart/AddToCart";
 const ProductCard = (product) => {
-  console.log(product.product)
   const { image, name, creator_name, price } = product.product;
 
   const [wishlist, setWishLisht] = useState(false);

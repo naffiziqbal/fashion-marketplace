@@ -1,26 +1,26 @@
 import Loading from '../../components/ui/loading/Loading';
-import { Navigate, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import useUserInfo from '../../hooks/useUserInfo';
+import { useSelector } from 'react-redux';
 
 
 // eslint-disable-next-line react/prop-types
 const ProtectedRoutes = ({ children }) => {
+    const user = useUserInfo()
+    const { isLoading } = useSelector(state => state.user)
+    console.log(isLoading)
+    console.log(user)
 
-    const location = useLocation()
-    // const { isAuthenticated, isLoading } = useAuth0()
-    const { uid } = useUserInfo()
+    if (isLoading) {
+        <Loading />
+    }
 
-    // if (isLoading) {
-    //     return <Loading />
-    // }
 
-    // const user = true
-    if (uid) {
+    if (user !== null) {
         return children
     }
 
-    return <Navigate to={'/'} state={{ from: location }} replace />
+    return <Navigate to={'/login'} />
 };
 
 export default ProtectedRoutes;

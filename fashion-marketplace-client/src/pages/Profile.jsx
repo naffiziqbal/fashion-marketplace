@@ -11,7 +11,6 @@ const Profile = () => {
     const closeModal = () => setIsModalOpen(false)
 
     const user = useUserInfo()
-    const { uid, displayName, photoURL } = user
 
 
     // Submitting the Modal Form To Update User
@@ -47,29 +46,32 @@ const Profile = () => {
     }
     return (
         <div className="min-h-screen">
-            <div>
-                <div className="flex flex-row  justify-evenly">
-                    <div className=" h-auto">
-                        {
-                            uid &&
+            {user?.uid ?
+                <div>
+                    <div className="flex flex-row  justify-evenly">
+                        <div className=" h-auto">
                             <div>
-                                <figure className=""> <img className="w-40 h-40 rounded-[50%]" src={photoURL} alt="user-photo" /></figure>
-                                <h3 className="my-12 text-3xl ">{displayName}</h3>
+                                <figure className=""> <img className="w-40 h-40 rounded-[50%]" src={user?.photoURL} alt="user-photo" /></figure>
+                                <h3 className="my-12 text-3xl ">{user?.displayName}</h3>
                             </div>
-                        }
+                        </div>
+                        <button
+                            onClick={handleModal}
+                            className=""><EditIcon /></button>
+
                     </div>
-                    <button
-                        onClick={handleModal}
-                        className=""><EditIcon /></button>
+                    <div className="flex justify-center items-center">
+                        <UpdateUserModal
+                            isOpen={isModalOpen}
+                            onClose={closeModal}
+                            onSubmit={handleSubmit} />
+                    </div>
+
                 </div>
-                {/* Update User  Modal  */}
-                <div className="flex justify-center items-center">
-                    <UpdateUserModal
-                        isOpen={isModalOpen}
-                        onClose={closeModal}
-                        onSubmit={handleSubmit} />
+                : <div className="text-center">
+                    NO DATA AVAILABLE
                 </div>
-            </div>
+            }
 
         </div>
     )
