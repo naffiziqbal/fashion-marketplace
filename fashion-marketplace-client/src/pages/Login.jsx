@@ -4,7 +4,7 @@ import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
-import { Link, json, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { logIn, setLoading } from "../redux/features/user/userSlice";
 import useUserInfo from "../hooks/useUserInfo";
 
@@ -19,14 +19,15 @@ const Signup = () => {
     const user = useUserInfo()
     const uid = user?.uid
     //  asapsd
+
     const handleFormSubmit = (data) => {
         const email = data.email;
         const password = data.password
         //**Login Action From Redux 
-        dispatch(logIn({ email, password }))
         
-        setLoading(true)
+        dispatch(logIn({ email, password }))
 
+        setLoading(true)
         setTimeout(() => {
             setLoading(false)
         }, 3000)
