@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 const ProtectedRoutes = ({ children }) => {
     const user = useUserInfo()
     const { isLoading } = useSelector(state => state.user)
-    console.log(isLoading)
-    console.log(user)
+    // console.log(isLoading)
+    // console.log(user)
 
     if (isLoading) {
         <Loading />

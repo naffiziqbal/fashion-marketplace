@@ -1,4 +1,3 @@
-
 .btn__ghost {
   min-width: 8rem;
   font-weight: 400;
@@ -56,5 +55,8 @@
 }
 
 .bg {
+  background-image: linear-gradient(to right, #873d38, #181e41);
+}
+.bg-2 {
   background-image: linear-gradient(to right, #181e41, #873d38);
 }

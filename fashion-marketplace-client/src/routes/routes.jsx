@@ -6,6 +6,8 @@ import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import ProtectedRoutes from "./routerComponent/ProtectedRoutes";
 import CreateProduct from "../pages/CreateProduct";
+import UserLayout from "../components/Shared/Layout/userLayout/UserLayout";
+import Products from "../components/Dashboard/UserDashboard/Products";
 // import ProtectedRoutes from "./protectedRoutes";
 
 const router = createBrowserRouter([
@@ -21,9 +23,32 @@ const router = createBrowserRouter([
         path: '/create-product',
         element: <CreateProduct />
       },
+      {
+        path: '/dashboard',
+        element: <ProtectedRoutes>
+          <UserLayout>
+            <Profile />
+          </UserLayout>
+        </ProtectedRoutes>,
+        children: [
+          {
+            path: '/dashboard/user-profile',
+            element: <Profile />
+          },
+          {
+            path: '/dashboard/my-products',
+            element: <Products />
+          }
+        ]
+      },
     ],
 
   },
+
+
+
+  //  Out Side
+
   {
     path: "/signup",
     element: <Signup />
@@ -32,20 +57,6 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />
   },
-  {
-    path: '/',
-    element:
-      <App />,
-
-    children: [
-      {
-        path: "/user-profile",
-        element: <ProtectedRoutes>
-          <Profile />
-        </ProtectedRoutes>
-      },
-    ]
-  }
 
 ]);
 

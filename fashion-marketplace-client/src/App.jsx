@@ -1,6 +1,7 @@
 
 import "./App.css";
 import MainLayout from "./components/Shared/Layout/MainLayout";
+import UserLayout from "./components/Shared/Layout/userLayout/UserLayout";
 // import { useAuth0 } from '@auth0/auth0-react';
 
 

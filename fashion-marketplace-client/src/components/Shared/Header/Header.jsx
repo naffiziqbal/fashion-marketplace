@@ -135,7 +135,7 @@ const Header = () => {
                       }}
                     >
                       <MenuItem onClick={handleClose}>
-                        <Link to={'/user-profile'}>
+                        <Link to={'/dashboard/user-profile'}>
                           Profile
                         </Link>
                       </MenuItem>
