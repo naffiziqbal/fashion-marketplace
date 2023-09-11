@@ -38,7 +38,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
-
 export const getAllProductsByName = async (req, res) => {
   try {
     const data = req.query;
