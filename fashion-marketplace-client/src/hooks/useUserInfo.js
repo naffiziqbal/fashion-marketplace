@@ -9,15 +9,15 @@ const useUserInfo = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setLoading(true));
-
     onAuthStateChanged(auth, (user) => {
+      dispatch(setLoading(true));
       if (user !== null) {
-        const email = user.email;
+        const email = user?.email;
         const displayName = user.displayName;
         dispatch(setUser({ email, displayName }));
         dispatch(setLoading(false));
       } else {
-        dispatch(setLoading(false));
+        dispatch(dispatch(setLoading(false)));
       }
       return setUserData(user);
     });

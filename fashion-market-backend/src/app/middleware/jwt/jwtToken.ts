@@ -5,9 +5,10 @@ const jwt = require("jsonwebtoken");
 
 const verifyToken = (req: any, res: Response, next: NextFunction) => {
   const authHeaders = req.headers.authorization;
+  console.log("Token", authHeaders);
   // Check Token Status
   if (!authHeaders) {
-    return res.status(401).json({
+    res.status(401).json({
       data: false,
       message: "Unauthorised User",
     });
@@ -19,9 +20,9 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
   // Veryfy and Decode Token
   jwt.verify(token, config.accessTokenSecret, (err: any, decoded: any) => {
     if (err) {
-      return res.status(401).json({
+      res.status(401).json({
         data: false,
-        messsage: "Unauthorized User",
+        messsage: "Could'nt Verify User",
       });
     }
     req.decoded = decoded;
@@ -31,9 +32,9 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
 
 const createToken = async (req: Request, res: Response) => {
   const user = req.body;
-  console.log(user);
+  console.log(user, "user From fn Create Toekn");
   const token = jwt.sign(user, config.accessTokenSecret, {
-    expiresIn: "5s",
+    expiresIn: "1h",
   });
   res.json({ token });
 };

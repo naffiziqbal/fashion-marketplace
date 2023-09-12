@@ -75,6 +75,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
+      state.isLoading = true;
+      console.log(setLoading(true));
       state.userInfo = action.payload;
     },
     setLoading: (state, action) => {

@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../../lib/firebase";
 
 // eslint-disable-next-line no-unused-vars
 const productionUrl = "https://fashion-market-zeta.vercel.app/api/v1/product";
@@ -18,8 +20,19 @@ export const productApis = createApi({
     getAllProducts: builder.query({
       query: () => `all-products`,
     }),
+
+    // Get Products Using Email
     getAllProductsByUser: builder.query({
-      query: (query) => `filter-products?author_email=${query}`,
+      query: (query) => ({
+        url: `filter-products?author_email=${query}`,
+        validateStatus: (response, result) => {
+          if (response.status === 401 || response.status === 403) {
+            signOut(auth, () => {});
+          }
+          console.log(response, result);
+          return result;
+        },
+      }),
     }),
   }),
 });

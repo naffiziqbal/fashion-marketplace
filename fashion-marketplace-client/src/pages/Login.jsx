@@ -29,11 +29,11 @@ const Signup = () => {
         //**Login Action From Redux 
 
         dispatch(logIn({ email, password }))
-
+        
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            navigate('/', { replace: true })
+            navigate(from, { replace: true })
         }, 3000)
 
 

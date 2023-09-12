@@ -6,6 +6,7 @@ const Products = () => {
   const { data, isLoading } = useGetAllProductsQuery(undefined);
   let content;
 
+
   if (isLoading) {
     content = <Loading />;
   }

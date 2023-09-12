@@ -1,6 +1,6 @@
 const handleJWT = async (email, password) => {
   try {
-    fetch("https://fashion-market-zeta.vercel.app/api/v1/user/jwt", {
+    fetch("http://localhost:5000/api/v1/user/jwt", {
       method: "POST",
       headers: {
         "content-type": "application/json",

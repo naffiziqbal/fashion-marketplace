@@ -1,17 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useUserInfo from "../../../hooks/useUserInfo";
 import { useGetAllProductsByUserQuery } from "../../../redux/features/products/apis/productApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../ui/loading/Loading";
+import { setLoading } from "../../../redux/features/user/userSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../lib/firebase";
 
 const Products = () => {
     const [selectedItem, setSelectedItem] = useState(false)
     const [selectAll, setSelectAll] = useState(false)
+    const [data, setProduct] = useState([])
+
     const { isLoading } = useSelector(state => state.user)
-    
+
+    const dispatch = useDispatch()
     const user = useUserInfo()
-    const { data } = useGetAllProductsByUserQuery(user?.email)
+    console.log(user.email)
+
+
+    // const data = useGetAllProductsByUserQuery(user?.email)
     
+    useEffect(() => {
+        dispatch(setLoading(true))
+        if (user?.email !== undefined) {
+            fetch(`http://localhost:5000/api/v1/product/filter-products?author_email=${user?.email}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }).then(res => {
+                if (res.status === 401) {
+                    signOut(auth, () => { })
+                }
+                return res.json()
+            })
+                .then(data => {
+                    console.log(data)
+                    setProduct(data)
+                })
+            dispatch(setLoading(false))
+        }
+
+    }, [user.email, dispatch])
+
 
     const handleChecked = (e) => {
         setSelectedItem(e.target.checked)
@@ -22,6 +53,7 @@ const Products = () => {
         setSelectAll(e.target.checked)
 
     }
+
 
     return (
         <div className="h-full overflow-auto w-full">
