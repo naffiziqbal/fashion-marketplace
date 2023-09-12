@@ -5,11 +5,12 @@ import {
   getAllProductsByName,
 } from "./product.controller";
 import { getAllProductsFromDb } from "./user.services";
+import { middleware } from "../../middleware/jwt/jwtToken";
 
 const router = express.Router();
 
 router.post("/create-product", createProduct);
 router.get("/all-products", getAllProducts);
-router.get("/filter-products", getAllProductsByName);
+router.get("/filter-products", middleware.verifyToken, getAllProductsByName);
 
 export default router;

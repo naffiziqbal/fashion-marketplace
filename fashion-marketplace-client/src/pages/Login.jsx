@@ -4,7 +4,7 @@ import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
-import { Link,useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { logIn, setLoading } from "../redux/features/user/userSlice";
 import useUserInfo from "../hooks/useUserInfo";
 
@@ -14,6 +14,9 @@ const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { isLoading } = useSelector(state => state.user)
     const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location)
+    const from = location?.state?.from?.pathname || '/'
 
 
     const user = useUserInfo()
@@ -24,13 +27,15 @@ const Signup = () => {
         const email = data.email;
         const password = data.password
         //**Login Action From Redux 
-        
+
         dispatch(logIn({ email, password }))
 
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
+            navigate('/', { replace: true })
         }, 3000)
+
 
     }
 

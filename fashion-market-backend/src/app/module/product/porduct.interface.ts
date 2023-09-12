@@ -3,5 +3,6 @@ export type IProduct = {
   image: string;
   creator_name: string;
   price: number;
+  author_email: string;
   isVerified: boolean;
 };

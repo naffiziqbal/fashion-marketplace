@@ -20,8 +20,6 @@ export const getAllProductsFromDb = async () => {
 };
 
 export const getAllProductsFromDbByName = async (query: any) => {
-  console.log(query);
   const data = await Product.find(query);
-  console.log(data);
   return data;
 };

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -22,6 +23,13 @@ export const createUser = createAsyncThunk("user/createuser", async (user) => {
     const email = user.email;
     const password = user.password;
     const data = await createUserWithEmailAndPassword(auth, email, password);
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "User Created Successfully",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     return data.user.email;
   } catch (err) {
     alert(err.message);
@@ -33,6 +41,14 @@ export const logIn = createAsyncThunk(
   async ({ email, password }) => {
     try {
       const data = await signInWithEmailAndPassword(auth, email, password);
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Login Successfull",
+        showConfirmButton: false,
+        timer: 1500,
+      });
 
       //* Post Jwt Function
       await handleJWT(email, password);

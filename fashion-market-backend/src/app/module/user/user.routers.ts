@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { createToken, getUser } from "./user.controller";
-import { middleware } from "../../middleware/verifyToken";
+import { middleware } from "../../middleware/jwt/jwtToken";
+import { getUser } from "./user.controller";
 
 const router = Router();
 
 router.get("/", getUser);
-router.post("/jwt", createToken);
+router.post("/jwt", middleware.createToken);
 
 export default router;

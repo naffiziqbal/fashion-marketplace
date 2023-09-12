@@ -4,6 +4,8 @@ import { useState } from "react";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import UpdateUserModal from "../components/CustomModal/updateProfileModal/updateProfileModal";
+import { useSelector } from "react-redux";
+import Loading from "../components/ui/loading/Loading";
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +13,7 @@ const Profile = () => {
     const closeModal = () => setIsModalOpen(false)
 
     const user = useUserInfo()
-
+    const { isLoading } = useSelector(state => state.user)
 
     // Submitting the Modal Form To Update User
     const handleSubmit = (data) => {
@@ -44,32 +46,39 @@ const Profile = () => {
     const handleModal = () => {
         openModel()
     }
+    if (isLoading) {
+        <Loading />
+    }
     return (
         <div className="min-h-screen">
-            {user?.uid ?
-                <div>
-                    <div className="flex flex-row  justify-evenly">
-                        <div className=" h-auto">
-                            <div>
-                                <figure className=""> <img className="w-40 h-40 rounded-[50%]" src={user?.photoURL} alt="user-photo" /></figure>
-                                <h3 className="my-12 text-3xl ">{user?.displayName}</h3>
+            {
+                isLoading ? <Loading /> : <div>
+                    {user?.uid ?
+                        <div>
+                            <div className="flex flex-row  justify-evenly">
+                                <div className=" h-auto">
+                                    <div>
+                                        <figure className=""> <img className="w-40 h-40 rounded-[50%]" src={user?.photoURL} alt="user-photo" /></figure>
+                                        <h3 className="my-12 text-3xl ">{user?.displayName}</h3>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={handleModal}
+                                    className=""><EditIcon /></button>
+
                             </div>
+                            <div className="flex justify-center items-center">
+                                <UpdateUserModal
+                                    isOpen={isModalOpen}
+                                    onClose={closeModal}
+                                    onSubmit={handleSubmit} />
+                            </div>
+
                         </div>
-                        <button
-                            onClick={handleModal}
-                            className=""><EditIcon /></button>
-
-                    </div>
-                    <div className="flex justify-center items-center">
-                        <UpdateUserModal
-                            isOpen={isModalOpen}
-                            onClose={closeModal}
-                            onSubmit={handleSubmit} />
-                    </div>
-
-                </div>
-                : <div className="text-center">
-                    NO DATA AVAILABLE
+                        : <div className="text-center">
+                            NO DATA AVAILABLE
+                        </div>
+                    }
                 </div>
             }
 

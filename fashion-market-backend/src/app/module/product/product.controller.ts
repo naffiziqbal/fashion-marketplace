@@ -9,7 +9,6 @@ export const createProduct = async (req: Request, res: Response) => {
   try {
     const product = req.body;
 
-    console.log(product);
     const result = await createProductToDb(product);
     res.status(200).json({
       success: true,
@@ -38,10 +37,21 @@ export const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllProductsByName = async (req, res) => {
+export const getAllProductsByName = async (req: any, res: any) => {
   try {
-    const data = req.query;
-    console.log(data);
+    const data = req?.query;
+    const decoded = req?.decoded;
+    console.log(data, " email");
+    console.log(decoded.user.email);
+    console.log("\n sssssss");
+
+    if (decoded?.user?.email !== data.author_email) {
+      res.status(403).json({
+        data: [],
+        message: "Unauthorized Access",
+      });
+      console.log("Data Not Matched");
+    }
     const product = await getAllProductsFromDbByName(data);
     res.status(200).json({
       data: product,

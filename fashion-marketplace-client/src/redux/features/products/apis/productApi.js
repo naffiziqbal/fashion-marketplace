@@ -8,13 +8,18 @@ const developmentUrl = "http://localhost:5000/api/v1/product/";
 
 export const productApis = createApi({
   reducerPath: "productApi",
-  baseQuery: fetchBaseQuery({ baseUrl: ` ${developmentUrl}` }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: ` ${developmentUrl}`,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: () => `all-products`,
     }),
     getAllProductsByUser: builder.query({
-      query: (query) => `filter-products?creator_name=${query}`,
+      query: (query) => `filter-products?author_email=${query}`,
     }),
   }),
 });

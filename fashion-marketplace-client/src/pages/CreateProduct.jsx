@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CreateProductModal from "../components/CustomModal/createProductModal/CreateProductModal";
-import { useAuth0 } from "@auth0/auth0-react";
 import img from '../assets/images/signupImg.png'
+import useUserInfo from "../hooks/useUserInfo";
 
 const CreateProduct = () => {
 
@@ -9,10 +9,12 @@ const CreateProduct = () => {
     const openModel = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false)
 
-    const { user } = useAuth0()
-    const userName = user?.email.slice(0, 7).replace(/\./g, '')
-    
+    const user = useUserInfo()
+
+    // const userName = user?.email.slice(0, 7).replace(/\./g, '')
+
     const handleSubmit = (data, reset) => {
+        console.log(data)
 
         const imgData = data.image[0];
         console.log(imgData)
@@ -35,10 +37,11 @@ const CreateProduct = () => {
                         image: imgData.data.url,
                         description: data.description,
                         price: data.price,
-                        creator_name: user ? userName : data.creator_Name
+                        creator_name: user ? user?.displayName : data?.creator_Name,
+                        author_email: user ? user?.email : data?.author_email
                     }
 
-                    fetch(`https://fashion-market-zeta.vercel.app/api/v1/product/create-product`, {
+                    fetch(`http://localhost:5000/api/v1/product/create-product`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"

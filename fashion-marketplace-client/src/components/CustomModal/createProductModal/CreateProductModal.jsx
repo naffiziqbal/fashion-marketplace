@@ -9,7 +9,8 @@ import useUserInfo from "../../../hooks/useUserInfo";
 const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-    const { displayName } = useUserInfo()
+
+    const user = useUserInfo()
 
 
     // Submit Modal data 
@@ -70,8 +71,14 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
                     <input
                         type="text"
                         placeholder="Author Name"
-                        value={displayName}
+                        value={user?.displayName}
                         {...register("creator_Name")}
+                    />
+                    <input
+                        type="email"
+                        placeholder="Author Email"
+                        value={user?.email}
+                        {...register("author_email")}
                     />
                     <div className="flex justify-around">
                         <button className="btn text-white" onClick={handleSubmit(handleFormSubmit)}>Submit</button>

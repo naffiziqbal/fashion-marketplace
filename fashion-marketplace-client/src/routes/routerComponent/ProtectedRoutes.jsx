@@ -1,5 +1,5 @@
 import Loading from '../../components/ui/loading/Loading';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import useUserInfo from '../../hooks/useUserInfo';
 import { useSelector } from 'react-redux';
 
@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 const ProtectedRoutes = ({ children }) => {
     const user = useUserInfo()
     const { isLoading } = useSelector(state => state.user)
+    const location = useLocation()
     // console.log(isLoading)
     // console.log(user)
 
@@ -19,8 +20,10 @@ const ProtectedRoutes = ({ children }) => {
     if (user !== null) {
         return children
     }
+    console.log(user)
 
-    return <Navigate to={'/login'} />
+    // return <Navigate to={'/login'} />
+    return <Navigate to={'/login'} state={{ from: location }} replace ></Navigate>
 };
 
 export default ProtectedRoutes;

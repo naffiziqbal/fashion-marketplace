@@ -17,6 +17,10 @@ const productSchema = new Schema<IProduct>({
     type: String,
     required: true,
   },
+  author_email: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,

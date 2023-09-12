@@ -15,6 +15,7 @@ import useUserInfo from "../../../hooks/useUserInfo";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 import logo from "../../../assets/logo.png"
+import Swal from "sweetalert2";
 
 
 const Header = () => {
@@ -41,7 +42,14 @@ const Header = () => {
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
-        alert("logged Out")
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Log Out Successfull",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
       })
   }
 
@@ -65,7 +73,7 @@ const Header = () => {
       </div>
       <div
         className={`${isOpen === true
-          ? "flex flex-col absolute w-full top-24 bg  duration-300 h-full"
+          ? "flex flex-col absolute w-full top-24 bg z-50  duration-300 h-full"
           : "hidden lg:flex flex-row  w-full justify-between items-center"
           } `}
       >
@@ -112,47 +120,45 @@ const Header = () => {
               </li>
               <li>
                 {" "}
-                <Link>
-                  <Avatar
-                    id="basic-button"
-                    aria-controls={open ? 'basic-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
-                    alt="Remy Sharp"
-                    src={user?.photoURL}
-                    sx={{ width: 32, height: 32, background: "#744b32" }}
-                  />
-                  <div>
+                <Avatar
+                  id="basic-button"
+                  aria-controls={open ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick}
+                  alt="Remy Sharp"
+                  src={user?.photoURL}
+                  sx={{ width: 32, height: 32, background: "#744b32" }}
+                />
+                <div>
 
-                    <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                      }}
-                    >
-                      <MenuItem onClick={handleClose}>
-                        <Link to={'/dashboard/user-profile'}>
-                          Profile
-                        </Link>
-                      </MenuItem>
-                      <MenuItem onClick={handleClose}>My account</MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        {!user?.uid ?
-                          <Link to={'/login'}>Login</Link>
-                          : <button onClick={handleLogOut}>
-                            Log Out
-                          </button>
-                        }
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <Link to={'/dashboard/user-profile'}>
+                        Profile
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      {!user?.uid ?
+                        <Link to={'/login'}>Login</Link>
+                        : <button onClick={handleLogOut}>
+                          Log Out
+                        </button>
+                      }
 
-                      </MenuItem>
+                    </MenuItem>
 
-                    </Menu>
-                  </div>
-                </Link>
+                  </Menu>
+                </div>
               </li>
             </ul>
           </nav>
