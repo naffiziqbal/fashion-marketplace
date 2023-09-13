@@ -49,6 +49,7 @@ const Profile = () => {
     if (isLoading) {
         <Loading />
     }
+    console.log(user)
     return (
         <div className="min-h-screen">
             {

@@ -21,13 +21,14 @@ const Signup = () => {
         const FName = data.FName
         const LName = data.LName
         const displayName = FName + " " + LName
+        const role = 'admin'
         const DOB = {
             month: data.month,
             day: data.day,
             year: data.year,
         }
         const user = {
-            email, password, displayName, DOB
+            email, password, displayName, DOB, role
         }
         dispatch(createUser(user))
         dispatch(updateUserProfile(user))

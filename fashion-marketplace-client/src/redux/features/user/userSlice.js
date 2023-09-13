@@ -13,6 +13,7 @@ const initialState = {
   userInfo: {
     email: {},
     name: {},
+    role: {},
   },
   isError: false,
   success: false,
@@ -22,6 +23,7 @@ export const createUser = createAsyncThunk("user/createuser", async (user) => {
   try {
     const email = user.email;
     const password = user.password;
+    const role = user.role;
     const data = await createUserWithEmailAndPassword(auth, email, password);
     Swal.fire({
       position: "center",
@@ -30,6 +32,8 @@ export const createUser = createAsyncThunk("user/createuser", async (user) => {
       showConfirmButton: false,
       timer: 1500,
     });
+    console.log(role);
+    data.user.providerData.push(role);
     return data.user.email;
   } catch (err) {
     alert(err.message);
@@ -76,7 +80,7 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.isLoading = true;
-      console.log(setLoading(true));
+      console.log(action);
       state.userInfo = action.payload;
     },
     setLoading: (state, action) => {
