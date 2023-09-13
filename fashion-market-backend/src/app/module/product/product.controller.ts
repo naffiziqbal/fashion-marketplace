@@ -3,7 +3,7 @@ import {
   createProductToDb,
   getAllProductsFromDb,
   getAllProductsFromDbByName,
-} from "./user.services";
+} from "./product.services";
 
 export const createProduct = async (req: Request, res: Response) => {
   try {
@@ -40,7 +40,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
 export const getAllProductsByName = async (req: any, res: any) => {
   try {
     const data = req?.query;
-    console.log(data)
+    console.log(data);
     console.log(data);
     const decoded = req.decoded;
     console.log(decoded, " Decoded", data.author_email);

@@ -4,7 +4,7 @@ import {
   getAllProducts,
   getAllProductsByName,
 } from "./product.controller";
-import { getAllProductsFromDb } from "./user.services";
+import { getAllProductsFromDb } from "./product.services";
 import { middleware } from "../../middleware/jwt/jwtToken";
 
 const router = express.Router();
