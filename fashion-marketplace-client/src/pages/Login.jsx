@@ -4,7 +4,7 @@ import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logIn, setLoading } from "../redux/features/user/userSlice";
 import useUserInfo from "../hooks/useUserInfo";
 
@@ -15,12 +15,10 @@ const Signup = () => {
     const { isLoading } = useSelector(state => state.user)
     const navigate = useNavigate()
     const location = useLocation()
-    console.log(location)
     const from = location?.state?.from?.pathname || '/'
 
 
     const user = useUserInfo()
-    const uid = user?.uid
     //  asapsd
 
     const handleFormSubmit = (data) => {
@@ -29,17 +27,19 @@ const Signup = () => {
         //**Login Action From Redux 
 
         dispatch(logIn({ email, password }))
-        
+
+        if (user?.uid) {
+            navigate(from, { replace: true })
+        }
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            navigate(from, { replace: true })
         }, 3000)
 
-
     }
+    console.log(user)
 
-    // if (uid) return navigate('/')
+    if (user?.uid) return navigate(from, { replace: true })
 
     return (
         <div className={style}>

@@ -21,7 +21,9 @@ const router = createBrowserRouter([
       },
       {
         path: '/create-product',
-        element: <CreateProduct />
+        element: <ProtectedRoutes>
+          <CreateProduct />
+        </ProtectedRoutes>
       },
       {
         path: '/dashboard',

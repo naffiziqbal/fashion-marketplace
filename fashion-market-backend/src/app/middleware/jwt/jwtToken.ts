@@ -9,7 +9,7 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
   // Check Token Status
   if (!authHeaders) {
     res.status(401).json({
-      data: false,
+      data: [],
       message: "Unauthorised User",
     });
   }
@@ -21,7 +21,7 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
   jwt.verify(token, config.accessTokenSecret, (err: any, decoded: any) => {
     if (err) {
       res.status(401).json({
-        data: false,
+        data: [],
         messsage: "Could'nt Verify User",
       });
     }
@@ -34,7 +34,7 @@ const createToken = async (req: Request, res: Response) => {
   const user = req.body;
   console.log(user, "user From fn Create Toekn");
   const token = jwt.sign(user, config.accessTokenSecret, {
-    expiresIn: "1h",
+    expiresIn: "15s",
   });
   res.json({ token });
 };
