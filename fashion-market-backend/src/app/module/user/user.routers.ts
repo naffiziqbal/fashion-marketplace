@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/", userController.getUser);
 router.post("/create-user", userController.createUser);
+router.post("/login", userController.userLogin);
 router.post("/jwt", middleware.createToken);
 
 export default router;
