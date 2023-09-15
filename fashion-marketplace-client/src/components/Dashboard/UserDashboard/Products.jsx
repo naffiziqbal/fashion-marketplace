@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useUserInfo from "../../../hooks/useUserInfo";
 import { useGetAllProductsByUserQuery } from "../../../redux/features/products/apis/productApi";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../ui/loading/Loading";
@@ -15,7 +14,6 @@ const Products = () => {
     const { isLoading } = useSelector(state => state.user)
 
     const dispatch = useDispatch()
-    const user = useUserInfo()
     console.log(user.email)
 
 

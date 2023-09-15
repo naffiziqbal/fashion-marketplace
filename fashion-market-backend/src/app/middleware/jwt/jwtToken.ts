@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 
 import config from "../../../config/config";
 const jwt = require("jsonwebtoken");
@@ -30,7 +30,7 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
   });
 };
 
-const createToken = async (req: Request, res: Response) => {
+const createToken: RequestHandler = async (req, res) => {
   const user = req.body;
   console.log(user, "user From fn Create Toekn");
   const token = jwt.sign(user, config.accessTokenSecret, {

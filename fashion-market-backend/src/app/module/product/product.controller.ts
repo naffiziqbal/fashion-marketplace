@@ -40,8 +40,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
 export const getAllProductsByName = async (req: any, res: any) => {
   try {
     const data = req?.query;
-    console.log(data);
-    console.log(data);
     const decoded = req.decoded;
     console.log(decoded, " Decoded", data.author_email);
     if (decoded.email !== data.author_email) {

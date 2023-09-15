@@ -1,17 +1,12 @@
 import { useState } from "react";
 import CreateProductModal from "../components/CustomModal/createProductModal/CreateProductModal";
 import img from '../assets/images/signupImg.png'
-import useUserInfo from "../hooks/useUserInfo";
 
 const CreateProduct = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModel = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false)
-
-    const user = useUserInfo()
-
-    // const userName = user?.email.slice(0, 7).replace(/\./g, '')
 
     const handleSubmit = (data, reset) => {
         console.log(data)

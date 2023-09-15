@@ -5,8 +5,9 @@ import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { logIn, setLoading } from "../redux/features/user/userSlice";
-import useUserInfo from "../hooks/useUserInfo";
+import { setLoading, setUser } from "../redux/features/user/userSlice";
+
+import Swal from "sweetalert2";
 
 const Signup = () => {
     const dispatch = useDispatch()
@@ -18,28 +19,48 @@ const Signup = () => {
     const from = location?.state?.from?.pathname || '/'
 
 
-    const user = useUserInfo()
+
     //  asapsd
+    const user = useSelector(state => state.user)
 
     const handleFormSubmit = (data) => {
         const email = data.email;
         const password = data.password
         //**Login Action From Redux 
+        const user = { email, password }
 
-        dispatch(logIn({ email, password }))
+        try {
+            fetch("http://localhost:5000/api/v1/user/login", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(user),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.success) {
+                        Swal.fire("Good job!", "You clicked the button!", "success");
+                        console.log(data)
+                        localStorage.setItem("accessToken", data.token)
+                        dispatch(setUser(data?.data));
+                    }
+                });
+            setTimeout(() => {
+                dispatch(setLoading(false))
+                navigate(from, { replace: true })
 
-        if (user?.uid) {
-            navigate(from, { replace: true })
+            }, 3000)
+
+
+        } catch (err) {
+            alert(err.message);
         }
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 3000)
 
     }
     console.log(user)
 
-    if (user?.uid) return navigate(from, { replace: true })
 
     return (
         <div className={style}>

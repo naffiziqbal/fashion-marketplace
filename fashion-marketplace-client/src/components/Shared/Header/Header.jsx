@@ -11,7 +11,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import Search from "../search/Search";
 import { useSelector } from "react-redux";
-import useUserInfo from "../../../hooks/useUserInfo";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 import logo from "../../../assets/logo.png"
@@ -23,7 +22,8 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
 
-  const user = useUserInfo()
+  const user = {}
+
 
 
   const handleMenuOpen = (isOpen) => {

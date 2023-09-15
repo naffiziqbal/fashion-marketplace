@@ -1,4 +1,3 @@
-import useUserInfo from "../hooks/useUserInfo";
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
 import { updateProfile } from "firebase/auth";
@@ -12,7 +11,6 @@ const Profile = () => {
     const openModel = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false)
 
-    const user = useUserInfo()
     const { isLoading } = useSelector(state => state.user)
 
     // Submitting the Modal Form To Update User

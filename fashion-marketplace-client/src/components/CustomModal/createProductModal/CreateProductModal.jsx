@@ -4,13 +4,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useForm } from "react-hook-form";
 import style from "./CreateProductModal.module.css";
 import { useEffect, useState } from "react";
-import useUserInfo from "../../../hooks/useUserInfo";
 
 const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-    const user = useUserInfo()
 
 
     // Submit Modal data 

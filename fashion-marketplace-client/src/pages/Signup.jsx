@@ -1,19 +1,25 @@
 // import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import signUpimage from "../assets/images/signupImg.png"
 import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
+import Cookies from 'js-cookie';
 
-import { Link } from "react-router-dom";
-import { updateProfile } from "firebase/auth";
-import { createUser, updateUserProfile } from "../redux/features/user/userSlice";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setUser } from "../redux/features/user/userSlice";
+import Swal from "sweetalert2";
 
 
 const Signup = () => {
     // const [month, setMonth] = useState('')
+    const navigate = useNavigate()
+    const location = useLocation()
+    const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const dispatch = useDispatch()
+    const from = location?.state?.from?.pathname || '/';
+
+
 
     const handleFormSubmit = (data) => {
         const email = data.email;
@@ -21,18 +27,43 @@ const Signup = () => {
         const FName = data.FName
         const LName = data.LName
         const displayName = FName + " " + LName
-        const role = 'admin'
-        const DOB = {
+        const role = data.seller || data.user
+        const birth = {
             month: data.month,
             day: data.day,
             year: data.year,
         }
+        const DOB = `${birth.month}-${birth.day}-${birth.year}`
         const user = {
-            email, password, displayName, DOB, role
+            email, password, displayName, DOB, role, userImg: "https://i.ibb.co/5Wd7my5/Vana-Studio-Powerful-Viking-warrior-with-long-flowing-hair-and-a-majestic-0.png"
         }
-        dispatch(createUser(user))
-        dispatch(updateUserProfile(user))
+        fetch(`http://localhost:5000/api/v1/user/create-user`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data?.success) {
+                    Cookies.set('user', data.data._id)
+                    Cookies.set('token', data?.token)
+                    // Cookies.set('token', data?.token, { path: '/', secure: true, sameSite: 'strict', httpOnly: true, expires: 7 })
+                    dispatch(setUser(data?.data))
+                    navigate(from, { replace: true })
+                    Swal.fire({
+                        title: `Congratulations ${data?.data?.displayName}`,
+                        text: 'You have Been Signed In 👏👏🎉',
+                        icon: 'success',
+                        timer: 1500
+                    })
+                }
+            })
+
     }
+
 
     return (
         <div className={style}>
@@ -106,6 +137,10 @@ const Signup = () => {
                                                 {errors.year && <p>{errors.year}</p>}
                                             </div>
                                         </label>
+                                        <div>
+                                            <input type="radio" value="user" name="role"{...register('user')} /> User
+                                            <input type="radio" value="seller" name="role" {...register('seller')} /> Seller
+                                        </div>
                                     </div>
                                     <div className="flex justify-end mt-20">
                                         <input className="btn cursor-pointer" type="submit" value="Create Account" />
