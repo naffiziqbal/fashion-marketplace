@@ -8,12 +8,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setLoading, setUser } from "../redux/features/user/userSlice";
 
 import Swal from "sweetalert2";
+import handleUserAuthentication from "../components/utils/userAuthentication";
+import Cookies from "js-cookie";
 
 const Signup = () => {
     const dispatch = useDispatch()
     // const [month, setMonth] = useState('')
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { isLoading } = useSelector(state => state.user)
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
@@ -24,43 +25,42 @@ const Signup = () => {
     const user = useSelector(state => state.user)
 
     const handleFormSubmit = (data) => {
+        dispatch(setLoading(true))
         const email = data.email;
         const password = data.password
         //**Login Action From Redux 
         const user = { email, password }
 
-        try {
-            fetch("http://localhost:5000/api/v1/user/login", {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json",
-                },
-                body: JSON.stringify(user),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.success) {
-                        Swal.fire("Good job!", "You clicked the button!", "success");
-                        console.log(data)
-                        localStorage.setItem("accessToken", data.token)
-                        dispatch(setUser(data?.data));
-                    }
-                });
-            setTimeout(() => {
+        //Handle user Login
+        const loginData = handleUserAuthentication(user, 'login')
+
+        // Returned Promise
+        loginData
+            .then(res => {
+                if (res.success) {
+                    Cookies.set('user', res.data._id, { expires: 3 })
+                    Cookies.set('accessToken', res.token, { expires: 3 })
+                    dispatch(setUser(res?.data))
+                    Swal.fire({
+                        title: `Congratulations ${res?.data?.displayName}`,
+                        text: 'You have Been Signed In 👏👏🎉',
+                        icon: 'success',
+                        timer: 1500
+                    })
+                    dispatch(setLoading(false))
+                    navigate(from, { replace: true })
+
+                }
+                Swal.fire({
+                    title: `Oh nooooo!`,
+                    text: res.error,
+                    icon: 'error',
+                    timer: 1500
+                })
                 dispatch(setLoading(false))
-                navigate(from, { replace: true })
-
-            }, 3000)
-
-
-        } catch (err) {
-            alert(err.message);
-        }
-
+            })
     }
     console.log(user)
-
 
     return (
         <div className={style}>
@@ -95,7 +95,7 @@ const Signup = () => {
                                     </div>
                                     <div className="flex justify-end mt-20">
                                         {
-                                            isLoading ? "Loading....." : <input className="btn cursor-pointer" type="submit" value="Log In" />
+                                            user?.isLoading ? "Loading....." : <input className="btn cursor-pointer" type="submit" value="Log In" />
                                         }
                                     </div>
                                 </form>

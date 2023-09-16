@@ -1,14 +1,17 @@
 
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./App.css";
 import MainLayout from "./components/Shared/Layout/MainLayout";
-import UserLayout from "./components/Shared/Layout/userLayout/UserLayout";
+
 import { useGetUserQuery } from "./redux/features/user/userApis";
-import { setUser } from "./redux/features/user/userSlice";
+
 // import { useAuth0 } from '@auth0/auth0-react';
 
 
 function App() {
+
+  const user = useSelector(state => state.user)
+  console.log(user)
   return (
     <div
       style={{

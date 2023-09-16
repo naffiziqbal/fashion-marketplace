@@ -5,6 +5,7 @@ import Loading from "../../ui/loading/Loading";
 import { setLoading } from "../../../redux/features/user/userSlice";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
+import { useGetUserQuery } from "../../../redux/features/user/userApis";
 
 const Products = () => {
     const [selectedItem, setSelectedItem] = useState(false)
@@ -17,8 +18,9 @@ const Products = () => {
     console.log(user.email)
 
 
+    const user = useGetUserQuery(undefined)
     // const data = useGetAllProductsByUserQuery(user?.email)
-    
+
     useEffect(() => {
         dispatch(setLoading(true))
         if (user?.email !== undefined) {

@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import Cookies from 'js-cookie';
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { setUser } from "../redux/features/user/userSlice";
+import { setLoading, setUser } from "../redux/features/user/userSlice";
 import Swal from "sweetalert2";
+import handleUserAuthentication from "../components/utils/userAuthentication";
 
 
 const Signup = () => {
@@ -37,29 +38,34 @@ const Signup = () => {
         const user = {
             email, password, displayName, DOB, role, userImg: "https://i.ibb.co/5Wd7my5/Vana-Studio-Powerful-Viking-warrior-with-long-flowing-hair-and-a-majestic-0.png"
         }
-        fetch(`http://localhost:5000/api/v1/user/create-user`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data?.success) {
-                    Cookies.set('user', data.data._id)
-                    Cookies.set('token', data?.token)
-                    // Cookies.set('token', data?.token, { path: '/', secure: true, sameSite: 'strict', httpOnly: true, expires: 7 })
-                    dispatch(setUser(data?.data))
-                    navigate(from, { replace: true })
+
+        const signupData = handleUserAuthentication(user, 'create-user')
+        signupData
+            .then(res => {
+                if (res.success) {
+                    Cookies.set('user', res.data._id, { expires: 3 })
+                    Cookies.set('accessToken', res.token, { expires: 3 })
+                    dispatch(setUser(res?.data))
                     Swal.fire({
-                        title: `Congratulations ${data?.data?.displayName}`,
+                        title: `Congratulations ${res?.data?.displayName}`,
                         text: 'You have Been Signed In 👏👏🎉',
                         icon: 'success',
                         timer: 1500
                     })
+                    dispatch(setLoading(false))
+                    navigate(from, { replace: true })
+
                 }
+                if (res.errors) {
+                    Swal.fire({
+                        title: `Oh nooooo!`,
+                        text: errors._message,
+                        icon: 'error',
+                        timer: 1500
+                    })
+                    dispatch(setLoading(false))
+                }
+
             })
 
     }
