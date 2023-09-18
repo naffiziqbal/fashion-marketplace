@@ -6,7 +6,7 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { Avatar, Menu, MenuItem } from "@mui/material";
 import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Search from "../search/Search";
@@ -15,6 +15,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 import logo from "../../../assets/logo.png"
 import Swal from "sweetalert2";
+import useUserInfoFormCookie from "../../../hooks/useUserInfoFormCookie";
+import Cookies from "js-cookie";
 
 
 const Header = () => {
@@ -22,7 +24,9 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
 
-  const user = {}
+  const { userInfo, isLoading } = useSelector(state => state.user)
+  const user = useUserInfoFormCookie()
+  console.log(user)
 
 
 
@@ -40,17 +44,10 @@ const Header = () => {
   };
 
   const handleLogOut = () => {
-    signOut(auth)
-      .then(() => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Log Out Successfull",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-
-      })
+    Cookies.remove("profile", "name", 'uid')
+    Cookies.remove("name")
+    Cookies.remove('uid')
+    Cookies.remove('accessToken',)
   }
 
 

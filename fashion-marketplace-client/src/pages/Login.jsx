@@ -38,7 +38,9 @@ const Signup = () => {
         loginData
             .then(res => {
                 if (res.success) {
-                    Cookies.set('user', res.data._id, { expires: 3 })
+                    Cookies.set('uid', res.data._id, { expires: 3 })
+                    Cookies.set('profile', res.data.userImg, { expires: 3 })
+                    Cookies.set('name', res.data.displayName, { expires: 3 })
                     Cookies.set('accessToken', res.token, { expires: 3 })
                     dispatch(setUser(res?.data))
                     Swal.fire({
@@ -47,17 +49,19 @@ const Signup = () => {
                         icon: 'success',
                         timer: 1500
                     })
-                    dispatch(setLoading(false))
+                    dispatch(setLoading(true))
                     navigate(from, { replace: true })
 
                 }
-                Swal.fire({
-                    title: `Oh nooooo!`,
-                    text: res.error,
-                    icon: 'error',
-                    timer: 1500
-                })
-                dispatch(setLoading(false))
+                if (res.errors) {
+                    Swal.fire({
+                        title: `Oh nooooo!`,
+                        text: res.error,
+                        icon: 'error',
+                        timer: 1500
+                    })
+                    dispatch(setLoading(false))
+                }
             })
     }
     console.log(user)

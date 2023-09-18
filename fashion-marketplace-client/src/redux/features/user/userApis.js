@@ -6,7 +6,7 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `http://localhost:5000/api/v1/user/`,
     headers: {
-      authorization: `Bearer ${Cookies.get("token")}`,
+      authorization: `Bearer ${Cookies.get("accessToken")}`,
     },
   }),
   endpoints: (builder) => ({
@@ -14,8 +14,8 @@ export const userApi = createApi({
       query: () => ({
         url: "profile",
         validateStatus: (res, result) => {
-          if (res.status === 401) {
-            localStorage.removeItem("accessToken");
+          if (res.status === 401 || res.status === 403) {
+            Cookies.remove("user");
           }
           return result;
         },
