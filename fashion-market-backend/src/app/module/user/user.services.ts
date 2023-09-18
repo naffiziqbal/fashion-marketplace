@@ -14,4 +14,8 @@ const getUserFromDb = async () => {
   return result;
 };
 
-export const userService = { createUsersToDb, getUserFromDb };
+const updateUserProfileInDb = async (query: any) => {
+  const result = await User.updateOne(query);
+  return result;
+};
+export const userService = { createUsersToDb, getUserFromDb,updateUserProfileInDb };

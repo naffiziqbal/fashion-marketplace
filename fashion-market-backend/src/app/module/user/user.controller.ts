@@ -84,4 +84,21 @@ const userLogin: RequestHandler = async (req, res) => {
   res.status(200).json({ data: user, token, success: true });
 };
 
-export const userController = { getUser, createUser, userLogin };
+const updateUserProfile: RequestHandler = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const query = new ObjectId(id);
+  const result = userService.updateUserProfileInDb(query);
+  res.status(200).json({
+    data: result,
+    success: true,
+  });
+  console.log(result);
+};
+
+export const userController = {
+  getUser,
+  createUser,
+  userLogin,
+  updateUserProfile,
+};

@@ -1,17 +1,25 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
-import { updateProfile } from "firebase/auth";
-import { auth } from "../lib/firebase";
 import UpdateUserModal from "../components/CustomModal/updateProfileModal/updateProfileModal";
 import { useSelector } from "react-redux";
 import Loading from "../components/ui/loading/Loading";
+import Cookies from 'js-cookie';
+import { useUpdateUserMutation } from '../redux/features/user/userApis';
+import useUserInfoFromDB from '../hooks/useUserInfoFromDB';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
     const openModel = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false)
 
     const { isLoading } = useSelector(state => state.user)
+    // const users = useUserInfoFormCookie()
+
+    const user = useUserInfoFromDB()
+    console.log(user)
+
+    const [updateUser, result] = useUpdateUserMutation(user?.uid)
 
     // Submitting the Modal Form To Update User
     const handleSubmit = (data) => {
@@ -32,9 +40,11 @@ const Profile = () => {
         })
             .then(res => res.json())
             .then(imgData => {
-                console.log(imgData.data.url)
                 if (imgData.success) {
-                    updateProfile(auth.currentUser, { displayName: displayName, photoURL: imgData.data.url }).then(() => { })
+                    data = { displayName, photoURL: imgData.data.url }
+                    Cookies.set('name', displayName)
+                    Cookies.set('profile', imgData.data.url)
+                    updateUser({ id: user?._id, data })
                     closeModal()
                 }
             }).catch(err => alert(err.message))
@@ -47,17 +57,16 @@ const Profile = () => {
     if (isLoading) {
         <Loading />
     }
-    console.log(user)
     return (
         <div className="min-h-screen">
             {
                 isLoading ? <Loading /> : <div>
-                    {user?.uid ?
+                    {user?._id ?
                         <div>
                             <div className="flex flex-row  justify-evenly">
                                 <div className=" h-auto">
                                     <div>
-                                        <figure className=""> <img className="w-40 h-40 rounded-[50%]" src={user?.photoURL} alt="user-photo" /></figure>
+                                        <figure className=""> <img className="w-40 h-40 rounded-[50%]" src={user?.userImg} alt="user-photo" /></figure>
                                         <h3 className="my-12 text-3xl ">{user?.displayName}</h3>
                                     </div>
                                 </div>

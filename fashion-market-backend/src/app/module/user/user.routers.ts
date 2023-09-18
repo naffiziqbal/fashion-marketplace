@@ -8,5 +8,6 @@ router.get("/profile", userController.getUser);
 router.post("/create-user", userController.createUser);
 router.post("/login", userController.userLogin);
 router.post("/jwt", middleware.createToken);
+router.post("/update-user/:id", userController.updateUserProfile);
 
 export default router;

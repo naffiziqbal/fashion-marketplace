@@ -26,7 +26,6 @@ const Header = () => {
 
   const { userInfo, isLoading } = useSelector(state => state.user)
   const user = useUserInfoFormCookie()
-  console.log(user)
 
 
 

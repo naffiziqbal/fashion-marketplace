@@ -21,7 +21,14 @@ export const userApi = createApi({
         },
       }),
     }),
+    updateUser: builder.mutation({
+      query: ({ id, ...data }) => ({
+        url: `update-user/${id}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetUserQuery } = userApi;
+export const { useGetUserQuery, useUpdateUserMutation } = userApi;

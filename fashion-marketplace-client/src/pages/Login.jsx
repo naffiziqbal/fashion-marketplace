@@ -37,6 +37,7 @@ const Signup = () => {
         // Returned Promise
         loginData
             .then(res => {
+                console.log(res)
                 if (res.success) {
                     Cookies.set('uid', res.data._id, { expires: 3 })
                     Cookies.set('profile', res.data.userImg, { expires: 3 })
@@ -53,16 +54,16 @@ const Signup = () => {
                     navigate(from, { replace: true })
 
                 }
-                if (res.errors) {
+                if (res.error) {
                     Swal.fire({
                         title: `Oh nooooo!`,
                         text: res.error,
                         icon: 'error',
                         timer: 1500
                     })
-                    dispatch(setLoading(false))
                 }
             })
+            dispatch(setLoading(false))
     }
     console.log(user)
 

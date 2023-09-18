@@ -1,9 +1,9 @@
 import { useState } from "react";
 import CreateProductModal from "../components/CustomModal/createProductModal/CreateProductModal";
 import img from '../assets/images/signupImg.png'
-import { useGetUserQuery } from "../redux/features/user/userApis";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../redux/features/user/userSlice";
+import useUserInfoFromDB from "../hooks/useUserInfoFromDB";
 
 const CreateProduct = () => {
 
@@ -12,10 +12,11 @@ const CreateProduct = () => {
     const closeModal = () => setIsModalOpen(false)
     const dispatch = useDispatch()
 
-    const { data } = useGetUserQuery(undefined)
+    // User Data From DB after A
+    const user = useUserInfoFromDB()
     const { isLoading } = useSelector(state => state.user)
-    const user = data?.data
 
+    
     const handleSubmit = (data, reset) => {
         dispatch(setLoading(true))
         console.log(isLoading, "start")

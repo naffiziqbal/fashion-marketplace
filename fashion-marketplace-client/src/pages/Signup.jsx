@@ -43,7 +43,7 @@ const Signup = () => {
         signupData
             .then(res => {
                 if (res.success) {
-                    Cookies.set('user', res.data._id, { expires: 3 })
+                    Cookies.set('profile', res.data.userImg, { expires: 3 })
                     Cookies.set('accessToken', res.token, { expires: 3 })
                     dispatch(setUser(res?.data))
                     Swal.fire({
