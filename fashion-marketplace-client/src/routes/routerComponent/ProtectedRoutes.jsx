@@ -18,7 +18,7 @@ const ProtectedRoutes = ({ children }) => {
     if (isLoading) {
         <Loading />
     }
-    const userData = Cookies.get('user')
+    const userData = Cookies.get('uid')
 
     if (userData) {
         return children

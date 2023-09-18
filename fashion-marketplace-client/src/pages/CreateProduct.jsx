@@ -1,15 +1,24 @@
 import { useState } from "react";
 import CreateProductModal from "../components/CustomModal/createProductModal/CreateProductModal";
 import img from '../assets/images/signupImg.png'
+import { useGetUserQuery } from "../redux/features/user/userApis";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../redux/features/user/userSlice";
 
 const CreateProduct = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModel = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false)
+    const dispatch = useDispatch()
+
+    const { data } = useGetUserQuery(undefined)
+    const { isLoading } = useSelector(state => state.user)
+    const user = data?.data
 
     const handleSubmit = (data, reset) => {
-        console.log(data)
+        dispatch(setLoading(true))
+        console.log(isLoading, "start")
 
         const imgData = data.image[0];
         console.log(imgData)
@@ -46,7 +55,8 @@ const CreateProduct = () => {
                         .then(res => res.json())
                         .then(data => {
                             console.log(data)
-                            if (data !== "Failed") {
+                            if (data.success) {
+                                dispatch(setLoading(false))
                                 alert('Product Created')
                                 reset()
                                 closeModal()
@@ -54,8 +64,6 @@ const CreateProduct = () => {
                         }).catch(err => alert(err.message))
                 }
             }).catch(err => alert(err.message))
-
-
     }
     return (
         <div className="my-12">
@@ -64,6 +72,7 @@ const CreateProduct = () => {
                     isOpen={isModalOpen}
                     onClose={closeModal}
                     onSubmit={handleSubmit}
+                    isLoading={isLoading}
                 />
             </div>
             <div>

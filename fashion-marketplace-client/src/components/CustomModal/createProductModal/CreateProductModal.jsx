@@ -5,13 +5,18 @@ import { useForm } from "react-hook-form";
 import style from "./CreateProductModal.module.css";
 import { useEffect, useState } from "react";
 import { useGetUserQuery } from "../../../redux/features/user/userApis";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../../redux/features/user/userSlice";
 
-const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
+const CreateProductModal = ({ isOpen, onClose, onSubmit, isLoading }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-    const user = useGetUserQuery(undefined)
+    const { data } = useGetUserQuery(undefined)
+    const user = data?.data
 
+
+    console.log(isLoading, "loading")
     // Submit Modal data 
     const handleFormSubmit = (data) => {
         onSubmit(data, reset)
@@ -80,7 +85,9 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit }) => {
                         {...register("author_email")}
                     />
                     <div className="flex justify-around">
-                        <button className="btn text-white" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
+                        {
+                            isLoading ? <button className="btn" disabled>Loading....</button> : <button className="btn text-white" onClick={handleSubmit(handleFormSubmit)}>Submit</button>
+                        }
                         <button className="btn__ghost border " onClick={onClose}>Cancel</button>
                     </div>
                 </div>
