@@ -10,6 +10,7 @@ import { setLoading, setUser } from "../redux/features/user/userSlice";
 import Swal from "sweetalert2";
 import handleUserAuthentication from "../components/utils/userAuthentication";
 import { useState } from "react";
+import handleUploadImage from "../components/utils/handleUploadImage";
 
 
 const Signup = () => {
@@ -23,7 +24,6 @@ const Signup = () => {
     const from = location?.state?.from?.pathname || '/';
 
 
-
     const handleFormSubmit = (data) => {
         const email = data.email;
         const password = data.password;
@@ -31,43 +31,56 @@ const Signup = () => {
         const LName = data.LName
         const displayName = FName + " " + LName
         const role = data.seller || data.user
+        const image = data.image[0]
+        const formData = new FormData()
+        formData.append('image', image)
         const birth = {
             month: data.month,
             day: data.day,
             year: data.year,
         }
         const DOB = `${birth.month}-${birth.day}-${birth.year}`
-        const user = {
-            email, password, displayName, DOB, role, userImg: "https://i.ibb.co/5Wd7my5/Vana-Studio-Powerful-Viking-warrior-with-long-flowing-hair-and-a-majestic-0.png"
-        }
+        
+        //? Handeling Upload Image Promise
+        const uploadImage = handleUploadImage(formData)
 
-        const signupData = handleUserAuthentication(user, 'create-user')
-        signupData
+        uploadImage
             .then(res => {
                 if (res.success) {
-                    Cookies.set('profile', res.data.userImg, { expires: 3 })
-                    Cookies.set('accessToken', res.token, { expires: 3 })
-                    dispatch(setUser(res?.data))
-                    Swal.fire({
-                        title: `Congratulations ${res?.data?.displayName}`,
-                        text: 'You have Been Signed In 👏👏🎉',
-                        icon: 'success',
-                        timer: 1500
-                    })
-                    dispatch(setLoading(false))
-                    navigate(from, { replace: true })
+                    const user = {
+                        email, password, displayName, DOB, role, userImg: res.data.url
+                    }
+                    //? Sign Up Image Promise
+                    const signupData = handleUserAuthentication(user, 'create-user')
+                    signupData
+                        .then(res => {
+                            if (res.success) {
+                                Cookies.set('profile', res.data.userImg, { expires: 3 })
+                                Cookies.set('accessToken', res.token, { expires: 3 })
+                                dispatch(setUser(res?.data))
+                                Swal.fire({
+                                    title: `Congratulations ${res?.data?.displayName}`,
+                                    text: 'You have Been Signed In 👏👏🎉',
+                                    icon: 'success',
+                                    timer: 1500
+                                })
+                                dispatch(setLoading(false))
+                                navigate(from, { replace: true })
+
+                            }
+                            if (res.errors) {
+                                Swal.fire({
+                                    title: `Oh nooooo!`,
+                                    text: errors._message,
+                                    icon: 'error',
+                                    timer: 1500
+                                })
+                                dispatch(setLoading(false))
+                            }
+
+                        })
 
                 }
-                if (res.errors) {
-                    Swal.fire({
-                        title: `Oh nooooo!`,
-                        text: errors._message,
-                        icon: 'error',
-                        timer: 1500
-                    })
-                    dispatch(setLoading(false))
-                }
-
             })
 
     }
