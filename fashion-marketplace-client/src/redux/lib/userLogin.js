@@ -1,6 +1,6 @@
 const userLogin = async (user) => {
   let userData = [];
-  fetch("http://localhost:5000/api/v1/user/create-user", {
+  fetch(`${import.meta.env.VITE_APP_LOCALHOST_USER_API}/create-user`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

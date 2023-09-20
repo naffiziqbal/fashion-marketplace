@@ -1,18 +1,20 @@
 // import { useState } from "react";
 import { useDispatch } from "react-redux";
 import signUpimage from "../assets/images/signupImg.png"
-import style from "./styles/SignUp.module.css"
 import { useForm } from "react-hook-form";
 import Cookies from 'js-cookie';
+import styles from './styles/SignUp.module.css'
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setLoading, setUser } from "../redux/features/user/userSlice";
 import Swal from "sweetalert2";
 import handleUserAuthentication from "../components/utils/userAuthentication";
+import { useState } from "react";
 
 
 const Signup = () => {
     // const [month, setMonth] = useState('')
+    const [selectedImage, setSelectedImage] = useState(null)
     const navigate = useNavigate()
     const location = useLocation()
     const dispatch = useDispatch()
@@ -69,10 +71,22 @@ const Signup = () => {
             })
 
     }
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setSelectedImage(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setSelectedImage(null);
+        }
+    };
 
 
     return (
-        <div className={style}>
+        <div className={styles.signup}>
             <div className="bg text-white ">
                 <div className="flex justify-center items-center min-h-screen">
                     <div className=" flex flex-col md:flex-row justify-evenly items-center gap-5">
@@ -94,6 +108,22 @@ const Signup = () => {
                                                 {...register('email')}
                                                 placeholder="Email Address" />
                                             {errors.email && <p>{errors.email}</p>}
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="file"
+                                                placeholder="Product Image "
+                                                {...register('image')}
+                                                onChange={handleImageChange}
+                                                className="image-upload"
+                                            />
+                                            {selectedImage && (
+                                                <img
+                                                    id="image-preview"
+                                                    src={selectedImage}
+                                                    alt="Image Preview"
+                                                />
+                                            )}
                                         </label>
                                         <div className="flex flex-row gap-5">
 
@@ -124,7 +154,7 @@ const Signup = () => {
                                                     <option value="March">March</option>
                                                     <option value="April">Aprill</option>
                                                     <option value="May">May</option>
-                                                    <option value="Jume">Jume</option>
+                                                    <option value="June">Jume</option>
                                                     <option value="July">July</option>
                                                     <option value="August">August</option>
                                                     <option value="September">September</option>

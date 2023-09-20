@@ -19,6 +19,7 @@ import useUserInfoFormCookie from "../../../hooks/useUserInfoFormCookie";
 import Cookies from "js-cookie";
 import handleLogOut from "../../utils/handleLogOut";
 import { setLoading } from "../../../redux/features/user/userSlice";
+import useUserInfoFromDB from "../../../hooks/useUserInfoFromDB";
 
 
 const Header = () => {
@@ -29,8 +30,8 @@ const Header = () => {
   const location = useLocation()
   const refresh = () => window.location.reload(true)
 
-  const { userInfo, isLoading } = useSelector(state => state.user)
-  const user = useUserInfoFormCookie()
+  const user = useUserInfoFromDB()
+  console.log(user)
 
 
 
@@ -141,7 +142,7 @@ const Header = () => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                     alt="Remy Sharp"
-                    src={user?.photoURL}
+                    src={user?.userImg}
                     sx={{ width: 32, height: 32, background: "#744b32" }}
                   />
                   <div>

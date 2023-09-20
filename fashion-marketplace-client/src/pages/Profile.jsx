@@ -17,6 +17,7 @@ const Profile = () => {
     // const users = useUserInfoFormCookie()
 
     const user = useUserInfoFromDB()
+    console.log(user)
 
     const [updateUser, result] = useUpdateUserMutation(user?.uid)
 

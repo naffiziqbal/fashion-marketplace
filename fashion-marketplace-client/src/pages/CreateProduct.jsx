@@ -6,6 +6,7 @@ import { setLoading } from "../redux/features/user/userSlice";
 import useUserInfoFromDB from "../hooks/useUserInfoFromDB";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import handleUploadImage from "../components/utils/handleUploadImage";
 
 const CreateProduct = () => {
 
@@ -20,24 +21,64 @@ const CreateProduct = () => {
 
 
     const handleSubmit = (data, reset) => {
-        dispatch(setLoading(true))
         console.log(isLoading, "start")
-
         const imgData = data.image[0];
-        console.log(imgData)
         const formData = new FormData()
         formData.append('image', imgData)
 
+        // Utility Function For Upload Image
+        const returnedData = handleUploadImage(formData);
+        returnedData
+            .then(res => {
+                console.log(res)
+                if (res.success) {
+                    const product = {
+                        name: data.PName,
+                        image: res.data.url,
+                        description: data.description,
+                        price: data.price,
+                        creator_name: user ? user?.displayName : data?.creator_Name,
+                        author_email: user ? user?.email : data?.author_email
+                    }
+                    fetch(`${import.meta.env.VITE_APP_LOCALHOST_PRODUCT_API}/create-product`, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(product),
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            if (data.success) {
+                                dispatch(setLoading(false))
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: 'Your Product Has Been Created',
+                                    timer: 1500
+                                })
+                                reset()
+                                closeModal()
+                                navigate('/dashboard/my-products')
 
-        const imgBBHostKey = import.meta.env.VITE_APP_imgbb_host_key
+                            }
+                        })
+                        .catch(err => Swal.fire({
+                            title: 'error',
+                            text: err.message,
+                            timer: 1500
+                        }))
+                }
+            })
+            .catch(err => Swal.fire({
+                title: 'error',
+                text: err.message,
+                timer: 1500
+            }))
+    }
 
-        fetch(`https://api.imgbb.com/1/upload?key=${imgBBHostKey}`, {
-            method: "POST",
-            body: formData,
-        })
-            .then(res => res.json())
-            .then(imgData => {
-                console.log(imgData)
+    {/* 
                 if (imgData.success) {
                     const product = {
                         name: data.PName,
@@ -48,7 +89,7 @@ const CreateProduct = () => {
                         author_email: user ? user?.email : data?.author_email
                     }
 
-                    fetch(`http://localhost:5000/api/v1/product/create-product`, {
+                    fetch(`${import.meta.env.VITE_APP_LOCALHOST_PRODUCT_API}/create-product`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"
@@ -77,12 +118,8 @@ const CreateProduct = () => {
                             timer: 1500
                         }))
                 }
-            }).catch(err => Swal.fire({
-                            title: 'error',
-                            text: err.message,
-                            timer: 1500
-                        }))
-    }
+
+*/}
     return (
         <div className="my-12">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

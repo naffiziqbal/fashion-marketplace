@@ -2,10 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
 
 // eslint-disable-next-line no-unused-vars
-const productionUrl = "https://fashion-market-zeta.vercel.app/api/v1/product";
+const productionUrl = `${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}`;
 
 // eslint-disable-next-line no-unused-vars
-const developmentUrl = "http://localhost:5000/api/v1/product/";
+const developmentUrl = `${import.meta.env.VITE_APP_LOCALHOST_PRODUCT_API}`;
 
 export const productApis = createApi({
   reducerPath: "productApi",
@@ -23,12 +23,11 @@ export const productApis = createApi({
     // Get Products Using Email
     getAllProductsByUser: builder.query({
       query: (query) => ({
-        url: `filter-products?author_email=${query}`,
+        url: `/filter-products?author_email=${query}`,
         validateStatus: (response, result) => {
           // if (response.status === 401 || response.status === 403) {
           //   handleLogOut();
           // }
-          console.log(response, result);
           return result;
         },
       }),

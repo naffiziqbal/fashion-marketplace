@@ -1,6 +1,6 @@
 const handleUserAuthentication = (user, route) => {
   const handleUserauth = new Promise((resolved, rejected) => {
-    fetch(`http://localhost:5000/api/v1/user/${route}`, {
+    fetch(`${import.meta.env.VITE_APP_LOCALHOST_USER_API}/${route}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -8,9 +8,7 @@ const handleUserAuthentication = (user, route) => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => {
-        resolved(data);
-      })
+      .then((data) => resolved(data))
       .catch((err) => {
         rejected(err);
       });

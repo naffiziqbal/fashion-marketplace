@@ -1,4 +1,4 @@
-input[type="text"] {
+.signup input[type="text"] {
   outline: none;
   width: 100%;
   background: none;
@@ -6,24 +6,7 @@ input[type="text"] {
   border-bottom: 1px solid;
   margin: 0.7rem 0;
 }
-input[type="email"] {
-  width: 100%;
-  outline: none;
-  background: none;
-  padding: 0.3rem;
-  border-bottom: 1px solid;
-  margin: 0.7rem 0;
-}
-
-input[type="password"] {
-  width: 100%;
-  outline: none;
-  background: none;
-  padding: 0.3rem;
-  border-bottom: 1px solid;
-  margin: 0.7rem 0;
-}
-input[type="number"] {
+.signup input[type="email"] {
   width: 100%;
   outline: none;
   background: none;
@@ -32,6 +15,62 @@ input[type="number"] {
   margin: 0.7rem 0;
 }
 
-option {
+.signup input[type="password"] {
+  width: 100%;
+  outline: none;
+  background: none;
+  padding: 0.3rem;
+  border-bottom: 1px solid;
+  margin: 0.7rem 0;
+}
+.signup input[type="number"] {
+  width: 100%;
+  outline: none;
+  background: none;
+  padding: 0.3rem;
+  border-bottom: 1px solid;
+  margin: 0.7rem 0;
+}
+
+.signup option {
   background: #414141;
+}
+
+.signup .image-upload {
+  text-align: center;
+  margin: 1rem;
+  color: red;
+  border: 1px solid;
+}
+
+.signup .custom-file-upload {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background-color: #0084ff;
+  color: #da1515;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+.signup #image-preview {
+  width: 100%;
+  border: 1px solid;
+  max-width: 300px;
+  max-height: 10rem;
+  margin-top: 10px;
+  position: absolute;
+  background: #000;
+}
+
+.signup button {
+  margin: 1rem 0;
+}
+
+.signup input::file-selector-button {
+  width: 100%;
+  cursor: pointer;
+  background: none;
+  border: 1px solid;
+  box-shadow: none;
+  outline: none;
 }
