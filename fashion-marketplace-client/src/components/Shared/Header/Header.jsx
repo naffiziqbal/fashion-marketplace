@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import style from "./header.module.css";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
@@ -10,19 +10,24 @@ import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import Search from "../search/Search";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 import logo from "../../../assets/logo.png"
 import Swal from "sweetalert2";
 import useUserInfoFormCookie from "../../../hooks/useUserInfoFormCookie";
 import Cookies from "js-cookie";
+import handleLogOut from "../../utils/handleLogOut";
+import { setLoading } from "../../../redux/features/user/userSlice";
 
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const refresh = () => window.location.reload(true)
 
   const { userInfo, isLoading } = useSelector(state => state.user)
   const user = useUserInfoFormCookie()
@@ -42,13 +47,25 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const handleLogOut = () => {
-    Cookies.remove("profile", "name", 'uid')
-    Cookies.remove("name")
-    Cookies.remove('uid')
-    Cookies.remove('accessToken',)
+  const logout = () => {
+    handleLogOut()
+    dispatch(setLoading(false))
+    Swal.fire({
+      title: 'Logged Out Successfull',
+      icon: 'success',
+      iconColor: 'red',
+      timer: 1500
+    })
+    navigate('/login')
+    refresh()
+
   }
 
+
+  useEffect(() => {
+    // Close the menu when the route changes
+    setIsOpen(false);
+  }, [location]);
 
   return (
     <div className="bg  sticky top-0 z-50  w-full mx-auto">
@@ -70,8 +87,8 @@ const Header = () => {
         </div>
         <div
           className={`${isOpen === true
-            ? "flex flex-col absolute w-full top-8 bg z-50  duration-300 h-screen"
-            : "hidden lg:flex flex-row  w-full justify-between items-center"
+            ? "duration-700 flex flex-col absolute w-full top-8 bg z-50  h-screen ml-0"
+            : "ml-[99rem] absolute lg:relative lg:ml-0 lg:flex flex-row  w-full justify-between items-center"
             } `}
         >
           <div className=" flex flex-col md: lg:flex-row gap-4 justify-between w-full  mt-5 mx-16 lg:items-center ">
@@ -147,7 +164,7 @@ const Header = () => {
                       <MenuItem onClick={handleClose}>
                         {!user?.uid ?
                           <Link to={'/login'}>Login</Link>
-                          : <button onClick={handleLogOut}>
+                          : <button onClick={logout}>
                             Log Out
                           </button>
                         }

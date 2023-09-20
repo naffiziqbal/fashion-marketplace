@@ -1,48 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetAllProductsByUserQuery } from "../../../redux/features/products/apis/productApi";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Loading from "../../ui/loading/Loading";
-import { setLoading } from "../../../redux/features/user/userSlice";
-import { signOut } from "firebase/auth";
-import { auth } from "../../../lib/firebase";
-import { useGetUserQuery } from "../../../redux/features/user/userApis";
-import Cookies from "js-cookie";
+import useUserInfoFromDB from "../../../hooks/useUserInfoFromDB";
+
 
 const Products = () => {
     const [selectedItem, setSelectedItem] = useState(false)
     const [selectAll, setSelectAll] = useState(false)
     // const [data, setProduct] = useState([])
 
-    const { isLoading} = useSelector(state => state.user)
+    const { isLoading } = useSelector(state => state.user)
     // const dispatch = useDispatch()
 
 
-    const user = { email: 'nafiziqbal0007000@gmail.com' }
+    const user = useUserInfoFromDB()
     const data = useGetAllProductsByUserQuery(user?.email)
-    console.log(data)
-
-    // useEffect(() => {
-    //     dispatch(setLoading(true))
-    //     if (user?.email !== undefined) {
-    //         fetch(`http://localhost:5000/api/v1/product/filter-products?author_email=${user?.email}`, {
-    //             headers: {
-    //                 authorization: `Bearer ${Cookies.get('accessToken')}`
-    //             }
-    //         }).then(res => {
-    //             if (res.status === 401) {
-    //                 // signOut(auth, () => { })
-    //                 console.log(res)
-    //             }
-    //             return res.json()
-    //         })
-    //             .then(data => {
-    //                 setProduct(data)
-    //             })
-    //         dispatch(setLoading(false))
-    //     }
-
-    // }, [user.email, dispatch])
-
 
     const handleChecked = (e) => {
         setSelectedItem(e.target.checked)

@@ -4,6 +4,8 @@ import img from '../assets/images/signupImg.png'
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../redux/features/user/userSlice";
 import useUserInfoFromDB from "../hooks/useUserInfoFromDB";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
 
@@ -11,7 +13,7 @@ const CreateProduct = () => {
     const openModel = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false)
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     // User Data From DB after A
     const user = useUserInfoFromDB()
     const { isLoading } = useSelector(state => state.user)
@@ -58,13 +60,28 @@ const CreateProduct = () => {
                             console.log(data)
                             if (data.success) {
                                 dispatch(setLoading(false))
-                                alert('Product Created')
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: 'Your Product Has Been Created',
+                                    timer: 1500
+                                })
                                 reset()
                                 closeModal()
+                                navigate('/dashboard/my-products')
+
                             }
-                        }).catch(err => alert(err.message))
+                        }).catch(err => Swal.fire({
+                            title: 'error',
+                            text: err.message,
+                            timer: 1500
+                        }))
                 }
-            }).catch(err => alert(err.message))
+            }).catch(err => Swal.fire({
+                            title: 'error',
+                            text: err.message,
+                            timer: 1500
+                        }))
     }
     return (
         <div className="my-12">

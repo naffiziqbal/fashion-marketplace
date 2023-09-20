@@ -42,7 +42,7 @@ const Signup = () => {
                     Cookies.set('profile', res.data.userImg, { expires: 3 })
                     Cookies.set('name', res.data.displayName, { expires: 3 })
                     Cookies.set('accessToken', res.token, { expires: 3 })
-                    dispatch(setUser(res?.data))
+                    dispatch(setUser(res.data))
                     Swal.fire({
                         title: `Congratulations ${res?.data?.displayName}`,
                         text: 'You have Been Signed In 👏👏🎉',
@@ -62,7 +62,7 @@ const Signup = () => {
                     })
                 }
             })
-            dispatch(setLoading(false))
+        dispatch(setLoading(false))
     }
     console.log(user)
 
