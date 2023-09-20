@@ -15,7 +15,21 @@ const getUserFromDb = async () => {
 };
 
 const updateUserProfileInDb = async (query: any) => {
-  const result = await User.updateOne(query);
+  const { _id, body } = query;
+
+  console.log(_id, body, "db");
+  const updatedDoc = {
+    $set: {
+      displayName: body.displayName,
+      userImg: body.photoURL,
+    },
+  };
+  const result = await User.updateOne({ _id }, updatedDoc);
+  console.log(result);
   return result;
 };
-export const userService = { createUsersToDb, getUserFromDb,updateUserProfileInDb };
+export const userService = {
+  createUsersToDb,
+  getUserFromDb,
+  updateUserProfileInDb,
+};

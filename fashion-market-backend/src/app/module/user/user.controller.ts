@@ -31,7 +31,6 @@ const getUser = async (req: Request, res: Response) => {
     res.status(200).json({
       data: user,
     });
-
   } catch (error) {
     return res.status(401).json({ error: "Invalid Token" });
   }
@@ -86,15 +85,14 @@ const userLogin: RequestHandler = async (req, res) => {
 };
 
 const updateUserProfile: RequestHandler = async (req, res) => {
-  const id = req.params.id;
-  console.log(id);
-  const query = new ObjectId(id);
-  const result = userService.updateUserProfileInDb(query);
+  const query = req.params.id;
+  const body = req.body;
+  const _id = new ObjectId(query);
+  const result = userService.updateUserProfileInDb({ _id, body });
   res.status(200).json({
     data: result,
     success: true,
   });
-  console.log(result);
 };
 
 export const userController = {
