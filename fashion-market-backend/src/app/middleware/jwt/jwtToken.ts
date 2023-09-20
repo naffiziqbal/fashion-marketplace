@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const verifyToken = (req: any, res: Response, next: NextFunction) => {
   const authHeaders = req.headers.authorization;
-  console.log("Token", authHeaders);
+  // console.log("Token", authHeaders);
   // Check Token Status
   if (!authHeaders) {
     res.status(401).json({
@@ -32,7 +32,7 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
 
 const createToken: RequestHandler = async (req, res) => {
   const user = req.body;
-  console.log(user, "user From fn Create Toekn");
+  // console.log(user, "user From fn Create Toekn");
   const token = jwt.sign(user, config.accessTokenSecret, {
     expiresIn: "15s",
   });

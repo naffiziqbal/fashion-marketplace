@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
 import { useGetUserQuery } from "../redux/features/user/userApis";
-import { setLoading } from "../redux/features/user/userSlice";
 
 const useUserInfoFromDB = () => {
 

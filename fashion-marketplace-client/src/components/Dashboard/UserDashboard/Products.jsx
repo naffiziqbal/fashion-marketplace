@@ -6,42 +6,42 @@ import { setLoading } from "../../../redux/features/user/userSlice";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 import { useGetUserQuery } from "../../../redux/features/user/userApis";
+import Cookies from "js-cookie";
 
 const Products = () => {
     const [selectedItem, setSelectedItem] = useState(false)
     const [selectAll, setSelectAll] = useState(false)
-    const [data, setProduct] = useState([])
+    // const [data, setProduct] = useState([])
 
-    const { isLoading } = useSelector(state => state.user)
-
-    const dispatch = useDispatch()
-    console.log(user.email)
+    const { isLoading} = useSelector(state => state.user)
+    // const dispatch = useDispatch()
 
 
-    const user = useGetUserQuery(undefined)
-    // const data = useGetAllProductsByUserQuery(user?.email)
+    const user = { email: 'nafiziqbal0007000@gmail.com' }
+    const data = useGetAllProductsByUserQuery(user?.email)
+    console.log(data)
 
-    useEffect(() => {
-        dispatch(setLoading(true))
-        if (user?.email !== undefined) {
-            fetch(`http://localhost:5000/api/v1/product/filter-products?author_email=${user?.email}`, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            }).then(res => {
-                if (res.status === 401) {
-                    signOut(auth, () => { })
-                }
-                return res.json()
-            })
-                .then(data => {
-                    console.log(data)
-                    setProduct(data)
-                })
-            dispatch(setLoading(false))
-        }
+    // useEffect(() => {
+    //     dispatch(setLoading(true))
+    //     if (user?.email !== undefined) {
+    //         fetch(`http://localhost:5000/api/v1/product/filter-products?author_email=${user?.email}`, {
+    //             headers: {
+    //                 authorization: `Bearer ${Cookies.get('accessToken')}`
+    //             }
+    //         }).then(res => {
+    //             if (res.status === 401) {
+    //                 // signOut(auth, () => { })
+    //                 console.log(res)
+    //             }
+    //             return res.json()
+    //         })
+    //             .then(data => {
+    //                 setProduct(data)
+    //             })
+    //         dispatch(setLoading(false))
+    //     }
 
-    }, [user.email, dispatch])
+    // }, [user.email, dispatch])
 
 
     const handleChecked = (e) => {
@@ -82,7 +82,7 @@ const Products = () => {
                     <tbody className='border'>
 
                         {
-                            data?.data?.map(product => <tr key={product?._id} className='border'>
+                            data?.data?.data?.map(product => <tr key={product?._id} className='border'>
                                 <td className="">
                                     <input className="w-12" type="checkbox"
                                         checked={selectAll === true ? true : undefined}

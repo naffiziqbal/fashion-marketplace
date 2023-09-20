@@ -37,7 +37,6 @@ const Signup = () => {
         // Returned Promise
         loginData
             .then(res => {
-                console.log(res)
                 if (res.success) {
                     Cookies.set('uid', res.data._id, { expires: 3 })
                     Cookies.set('profile', res.data.userImg, { expires: 3 })

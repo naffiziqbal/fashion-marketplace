@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const getUser = async (req: Request, res: Response) => {
   const authHeaders = req.headers.authorization;
   const token = authHeaders?.split(" ")[1];
-  console.log(token, "auth");
+  // console.log(token, "auth");
 
   if (!token) {
     return res.status(401).json({ error: "No Authorised" });
@@ -18,7 +18,7 @@ const getUser = async (req: Request, res: Response) => {
   try {
     const decodedToken = jwt.verify(token, config.accessTokenSecret);
     const userId = decodedToken.user?._id;
-    console.log(userId, "UID");
+    // console.log(userId, "UID");
 
     const id = new ObjectId(userId);
     const user = await User.findById(id);
@@ -31,6 +31,7 @@ const getUser = async (req: Request, res: Response) => {
     res.status(200).json({
       data: user,
     });
+
   } catch (error) {
     return res.status(401).json({ error: "Invalid Token" });
   }

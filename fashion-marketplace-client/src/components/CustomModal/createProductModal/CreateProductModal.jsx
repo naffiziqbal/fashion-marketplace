@@ -14,6 +14,7 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit, isLoading }) => {
 
     const { data } = useGetUserQuery(undefined)
     const user = data?.data
+    console.log(data)
 
 
     console.log(isLoading, "loading")

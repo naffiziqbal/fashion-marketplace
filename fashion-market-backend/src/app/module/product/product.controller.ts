@@ -8,6 +8,7 @@ import {
 export const createProduct = async (req: Request, res: Response) => {
   try {
     const product = req.body;
+    console.log(product);
 
     const result = await createProductToDb(product);
     res.status(200).json({
@@ -40,9 +41,10 @@ export const getAllProducts = async (req: Request, res: Response) => {
 export const getAllProductsByName = async (req: any, res: any) => {
   try {
     const data = req?.query;
+    console.log(data, "author");
     const decoded = req.decoded;
-    console.log(decoded, " Decoded", data.author_email);
-    if (decoded.email !== data.author_email) {
+    console.log(decoded);
+    if (decoded.user.email !== data.author_email) {
       res.status(401).json({
         data: [],
         status: 401,
