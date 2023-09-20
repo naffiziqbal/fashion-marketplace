@@ -64,10 +64,9 @@ const Signup = () => {
             })
         dispatch(setLoading(false))
     }
-    console.log(user)
 
     return (
-        <div className={style}>
+        <div className={style.signup}>
             <div className="bg text-white ">
                 <div className="flex justify-center items-center min-h-screen">
                     <div className=" flex flex-col md:flex-row justify-evenly items-center gap-5">

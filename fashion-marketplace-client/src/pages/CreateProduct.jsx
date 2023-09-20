@@ -77,52 +77,9 @@ const CreateProduct = () => {
                 timer: 1500
             }))
     }
-
-    {/* 
-                if (imgData.success) {
-                    const product = {
-                        name: data.PName,
-                        image: imgData.data.url,
-                        description: data.description,
-                        price: data.price,
-                        creator_name: user ? user?.displayName : data?.creator_Name,
-                        author_email: user ? user?.email : data?.author_email
-                    }
-
-                    fetch(`${import.meta.env.VITE_APP_LOCALHOST_PRODUCT_API}/create-product`, {
-                        method: "POST",
-                        headers: {
-                            "content-type": "application/json"
-                        },
-                        body: JSON.stringify(product),
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log(data)
-                            if (data.success) {
-                                dispatch(setLoading(false))
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success',
-                                    text: 'Your Product Has Been Created',
-                                    timer: 1500
-                                })
-                                reset()
-                                closeModal()
-                                navigate('/dashboard/my-products')
-
-                            }
-                        }).catch(err => Swal.fire({
-                            title: 'error',
-                            text: err.message,
-                            timer: 1500
-                        }))
-                }
-
-*/}
     return (
         <div className="my-12">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  duration-700">
                 <CreateProductModal
                     isOpen={isModalOpen}
                     onClose={closeModal}

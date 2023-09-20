@@ -163,7 +163,7 @@ const Header = () => {
                       </MenuItem>
                       <MenuItem onClick={handleClose}>My account</MenuItem>
                       <MenuItem onClick={handleClose}>
-                        {!user?.uid ?
+                        {!user?._id ?
                           <Link to={'/login'}>Login</Link>
                           : <button onClick={logout}>
                             Log Out

@@ -39,8 +39,8 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit, isLoading }) => {
     };
 
     return (
-        <div className={style}>
-            <div className=" rounded-xl w-full bg g-[#c2c2c2c5] text-white shadow-2xl  z-50">
+        <div className={style.create_product}>
+            <div className=" rounded-xl w-full bg g-[#c2c2c2c5] text-white shadow-2xl  z-50 duration-700">
                 <div className="m-4 flex flex-col">
                     <h2 className="py-6 font-extrabold text-2xl text-center ">Enter Product Details</h2>
 
