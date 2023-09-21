@@ -40,7 +40,7 @@ const CreateProduct = () => {
                         creator_name: user ? user?.displayName : data?.creator_Name,
                         author_email: user ? user?.email : data?.author_email
                     }
-                    fetch(`${import.meta.env.VITE_APP_LOCALHOST_PRODUCT_API}/create-product`, {
+                    fetch(`${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}/create-product`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"

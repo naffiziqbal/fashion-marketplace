@@ -5,15 +5,12 @@ import Cookies from "js-cookie";
 const productionUrl = `${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}`;
 
 // eslint-disable-next-line no-unused-vars
-const developmentUrl = `${import.meta.env.VITE_APP_LOCALHOST_PRODUCT_API}`;
+const developmentUrl = `${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}`;
 
 export const productApis = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: ` ${developmentUrl}`,
-    headers: {
-      authorization: `Bearer ${Cookies.get("accessToken")}`,
-    },
+    baseUrl: ` ${productionUrl}`,
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
@@ -24,6 +21,9 @@ export const productApis = createApi({
     getAllProductsByUser: builder.query({
       query: (query) => ({
         url: `/filter-products?author_email=${query}`,
+        headers: {
+          authorization: `Bearer ${Cookies.get("accessToken")}`,
+        },
         validateStatus: (response, result) => {
           // if (response.status === 401 || response.status === 403) {
           //   handleLogOut();

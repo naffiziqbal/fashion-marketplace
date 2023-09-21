@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import handleLogOut from "../../../components/utils/handleLogOut";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -10,24 +9,24 @@ export const userApi = createApi({
       authorization: `Bearer ${Cookies.get("accessToken")}`,
     },
   }),
+  tagTypes: ["POST"],
   endpoints: (builder) => ({
     getUser: builder.query({
-      query: () => ({
-        url: "profile",
-        validateStatus: (res, result) => {
-          if (res.status === 401 || res.status === 403) {
-            handleLogOut();
-          }
-          return result;
+      query: (id) => ({
+        url: `/profile/${id}`,
+        headers: {
+          authorization: `Bearer ${Cookies.get("accessToken")}`,
         },
       }),
+      invalidatesTags: ["POST"],
     }),
     updateUser: builder.mutation({
-      query: ({ id,data }) => ({
+      query: ({ id, data }) => ({
         url: `/update-user/${id}`,
         method: "POST",
         body: data,
       }),
+      providesTags: ["POST"],
     }),
   }),
 });

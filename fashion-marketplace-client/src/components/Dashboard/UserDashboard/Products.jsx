@@ -3,6 +3,7 @@ import { useGetAllProductsByUserQuery } from "../../../redux/features/products/a
 import { useSelector } from "react-redux";
 import Loading from "../../ui/loading/Loading";
 import useUserInfoFromDB from "../../../hooks/useUserInfoFromDB";
+import Cookies from "js-cookie";
 
 
 const Products = () => {
@@ -12,7 +13,6 @@ const Products = () => {
 
     const { isLoading } = useSelector(state => state.user)
     // const dispatch = useDispatch()
-
 
     const user = useUserInfoFromDB()
     const data = useGetAllProductsByUserQuery(user?.email)
@@ -27,7 +27,9 @@ const Products = () => {
 
     }
 
-
+    if (isLoading) {
+        return <Loading />
+    }
     return (
         <div className="h-full overflow-auto w-full">
 

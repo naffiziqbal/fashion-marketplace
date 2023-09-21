@@ -15,8 +15,10 @@ const Profile = () => {
 
     const { isLoading } = useSelector(state => state.user)
     // const users = useUserInfoFormCookie()
+    console.log(isLoading)
 
-    const user = useUserInfoFromDB()
+    const id = Cookies.get('uid')
+    const user = useUserInfoFromDB(id)
     console.log(user)
 
     const [updateUser, result] = useUpdateUserMutation(user?.uid)
@@ -54,9 +56,8 @@ const Profile = () => {
     const handleModal = () => {
         openModel()
     }
-    if (isLoading) {
-        <Loading />
-    }
+    console.log(isLoading)
+
     return (
         <div className="min-h-screen">
             {

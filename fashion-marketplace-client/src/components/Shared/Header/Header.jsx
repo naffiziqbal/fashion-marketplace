@@ -57,9 +57,7 @@ const Header = () => {
       iconColor: 'red',
       timer: 1500
     })
-    navigate('/login')
     refresh()
-
   }
 
 

@@ -1,6 +1,6 @@
 const handleJWT = async (email, password) => {
   try {
-    fetch(`${import.meta.env.VITE_APP_LOCALHOST_USER_API}/jwt`, {
+    fetch(`${import.meta.env.VITE_APP_PRODUCTION_USER_API}/jwt`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

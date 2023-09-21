@@ -14,10 +14,8 @@ const CreateProductModal = ({ isOpen, onClose, onSubmit, isLoading }) => {
 
     const { data } = useGetUserQuery(undefined)
     const user = data?.data
-    console.log(data)
 
 
-    console.log(isLoading, "loading")
     // Submit Modal data 
     const handleFormSubmit = (data) => {
         onSubmit(data, reset)
