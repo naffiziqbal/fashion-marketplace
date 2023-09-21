@@ -8,7 +8,6 @@ const UserLayout = () => {
 
     const handleMenuOpen = (isMenuOpen) => {
         setIsMenuOpen(isMenuOpen)
-        console.log(isMenuOpen)
     }
 
     useEffect(() => {

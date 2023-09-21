@@ -15,11 +15,9 @@ const Profile = () => {
 
     const { isLoading } = useSelector(state => state.user)
     // const users = useUserInfoFormCookie()
-    console.log(isLoading)
 
     const id = Cookies.get('uid')
     const user = useUserInfoFromDB(id)
-    console.log(user)
 
     const [updateUser, result] = useUpdateUserMutation(user?.uid)
 
@@ -30,7 +28,7 @@ const Profile = () => {
         const displayName = FName + " " + LName;
 
         const imgData = data.image[0];
-        console.log(imgData)
+        (imgData)
         const formData = new FormData()
         formData.append('image', imgData)
 
@@ -56,7 +54,7 @@ const Profile = () => {
     const handleModal = () => {
         openModel()
     }
-    console.log(isLoading)
+    (isLoading)
 
     return (
         <div className="min-h-screen">

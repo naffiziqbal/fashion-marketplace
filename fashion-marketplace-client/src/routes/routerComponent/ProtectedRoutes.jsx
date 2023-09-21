@@ -9,9 +9,7 @@ const ProtectedRoutes = ({ children }) => {
     const location = useLocation()
     const user = useUserInfoFromDB()
     const dispatch = useDispatch()
-    console.log(user)
     const { isLoading } = useSelector(state => state.user)
-    console.log(isLoading)
 
     if (user) {
         dispatch(setLoading(false))

@@ -31,7 +31,6 @@ const Header = () => {
   const refresh = () => window.location.reload(true)
 
   const user = useUserInfoFromDB()
-  console.log(user)
 
 
 

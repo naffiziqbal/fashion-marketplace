@@ -17,7 +17,7 @@ const userSlice = createSlice({
       state.isLoading = true;
       state.isSignedIn = true;
       state.userInfo = action.payload;
-      console.log(state, action);
+      state, action;
     },
     setLoading: (state, action) => {
       state.isLoading = action.payload;

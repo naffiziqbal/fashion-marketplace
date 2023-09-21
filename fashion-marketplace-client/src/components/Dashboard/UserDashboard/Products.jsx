@@ -3,7 +3,6 @@ import { useGetAllProductsByUserQuery } from "../../../redux/features/products/a
 import { useSelector } from "react-redux";
 import Loading from "../../ui/loading/Loading";
 import useUserInfoFromDB from "../../../hooks/useUserInfoFromDB";
-import Cookies from "js-cookie";
 
 
 const Products = () => {

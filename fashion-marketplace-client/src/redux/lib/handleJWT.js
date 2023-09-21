@@ -9,7 +9,7 @@ const handleJWT = async (email, password) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        data;
         localStorage.setItem("accessToken", data.token);
       });
   } catch (err) {

@@ -9,10 +9,10 @@ const userLogin = async (user) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      data;
       userData.push(data.data);
     });
-  console.log(userData);
+  userData;
   return userData;
 };
 

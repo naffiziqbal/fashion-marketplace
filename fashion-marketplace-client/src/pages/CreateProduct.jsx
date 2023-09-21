@@ -21,7 +21,6 @@ const CreateProduct = () => {
 
 
     const handleSubmit = (data, reset) => {
-        console.log(isLoading, "start")
         const imgData = data.image[0];
         const formData = new FormData()
         formData.append('image', imgData)
@@ -49,7 +48,6 @@ const CreateProduct = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
-                            console.log(data)
                             if (data.success) {
                                 dispatch(setLoading(false))
                                 Swal.fire({
