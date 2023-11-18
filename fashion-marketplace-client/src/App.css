@@ -23,7 +23,8 @@
 }
 
 .transparent__bg {
-  background-image: linear-gradient(to top right, #671ae410, #3e076b17);
+  /* background-image: linear-gradient(to top right, #671ae410, #3e076b17); */
+  background: rgba(158, 158, 158, 0.205);
 }
 .onHover:hover {
   border: 1px;

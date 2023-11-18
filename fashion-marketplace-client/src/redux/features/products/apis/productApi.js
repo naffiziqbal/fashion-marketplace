@@ -5,12 +5,12 @@ import Cookies from "js-cookie";
 const productionUrl = `${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}`;
 
 // eslint-disable-next-line no-unused-vars
-const developmentUrl = `${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}`;
+const developmentUrl = `${import.meta.env.VITE_APP_LOCAL_PRODUCT_API}`;
 
 export const productApis = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: ` ${productionUrl}`,
+    baseUrl: ` ${developmentUrl}`,
   }),
   endpoints: (builder) => ({
     getAllProducts: builder.query({
