@@ -2,3 +2,12 @@
   padding: 0 2rem;
 }
 
+.search {
+  width: 25%;
+}
+
+ @media screen and (max-width: 768px) {
+  .search {
+  width: 100%;
+}
+ }

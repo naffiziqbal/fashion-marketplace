@@ -66,9 +66,13 @@ const Header = () => {
   }, [location]);
 
   return (
-    <div className="bg  sticky top-0 z-50  w-full mx-auto">
-      <div className="flex y-5  items-center justify-between">
-        <div className="w-full lg:w-auto   flex justify-between items-center mx-6">
+    <div className="bg sticky top-0 z-50  mx-auto">
+      <div className="flex flex-row">
+        <div className="w-full lg:w-auto flex justify-between items-center">
+
+          {/* ------------------------------------------------- */}
+          { /* Logo */}
+          {/* ------------------------------------------------- */}
           <div className="flex items-center">
             <Link to={`/`}>
               <figure className=" w-52">
@@ -86,11 +90,14 @@ const Header = () => {
         <div
           className={`${isOpen === true
             ? "duration-700 flex flex-col absolute w-full top-8 bg z-50  h-screen ml-0"
-            : "ml-[99rem] absolute lg:relative lg:ml-0 lg:flex flex-row  w-full justify-between items-center"
+            : "hidden absolute lg:relative lg:ml-0 lg:flex flex-row  w-full justify-between items-center"
             } `}
         >
-          <div className=" flex flex-col md: lg:flex-row gap-4 justify-between w-full  mt-5 mx-16 lg:items-center ">
+          <div className=" flex flex-col lg:flex-row gap-4 justify-between mt-5 mx-16 lg:items-center lg:w-full ">
+            {/* ======================================================= */}
+            {/*  Search Functionality  */}
             <Search />
+            {/* ======================================================= */}
             <nav className="">
               <ul className="flex flex-col lg:flex-row gap-4 py-5 md:py-0">
                 <li>
@@ -102,6 +109,7 @@ const Header = () => {
                 <li>
                   <Link to={'/create-product'}>Create Products</Link>
                 </li>
+                {/*
                 <li>
                   <Link>Drops</Link>
                 </li>
@@ -119,6 +127,8 @@ const Header = () => {
                     </li>
                   </ul>
                 </li>
+                */}
+
                 <li>
                   <Link>
                     <NotificationsIcon />

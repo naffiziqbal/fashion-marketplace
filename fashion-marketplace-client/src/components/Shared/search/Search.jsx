@@ -39,7 +39,7 @@ const Search = () => {
                         type="text"
                         name="search"
                         placeholder="Search Items"
-                        className="lg:min-w-[358px] min-h-[48px] w-full md:w-1/2 md:border border-b rounded-none md:rounded-3xl outline-none"
+                        className="h-[3rem] w-[32rem] md:border rounded-none md:rounded-3xl outline-none"
                         onChange={handleSearch}
                         value={searchQuery}
                     />

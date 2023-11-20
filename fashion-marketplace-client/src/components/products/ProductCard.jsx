@@ -14,7 +14,7 @@ const ProductCard = (product) => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className=" p-5 transparent__bg rounded-xl hover:scale-105 duration-500 bg-[#46464617] cursor-pointer">
+      <div className="p-5  transparent__bg rounded-xl  duration-500 bg-[#46464617] cursor-pointer">
         <figure className="  w-[20rem] h-[25rem]">
           <img className="w-fit " src={image} alt="" />
         </figure>

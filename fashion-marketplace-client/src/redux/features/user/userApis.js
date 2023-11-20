@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_APP_LOCALHOST_USER_API}`,
+    baseUrl: `${import.meta.env.VITE_APP_LOCAL_USER_API}`,
     headers: {
       authorization: `Bearer ${Cookies.get("accessToken")}`,
     },
@@ -13,7 +13,7 @@ export const userApi = createApi({
   endpoints: (builder) => ({
     getUser: builder.query({
       query: (id) => ({
-        url: `/profile/${id}`,
+        url: `profile/${id}`,
         headers: {
           authorization: `Bearer ${Cookies.get("accessToken")}`,
         },
@@ -22,7 +22,7 @@ export const userApi = createApi({
     }),
     updateUser: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/update-user/${id}`,
+        url: `update-user/${id}`,
         method: "POST",
         body: data,
       }),
