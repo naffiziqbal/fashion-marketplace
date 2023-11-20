@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 const getUser = async (req: Request, res: Response) => {
   const authHeaders = req.headers.authorization;
   const token = authHeaders?.split(" ")[1];
-  // console.log(token, "auth");
+  console.log(token, "auth");
 
   if (!token) {
     return res.status(401).json({ error: "No Authorised" });
@@ -34,6 +34,12 @@ const getUser = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(401).json({ error: "Invalid Token" });
   }
+};
+
+const getAllUsers: RequestHandler = async (req, res) => {
+  const result = userService.getUserFromDb();
+  console.log(result)
+  return result;
 };
 
 const createUser = async (req: Request, res: Response) => {
@@ -97,6 +103,7 @@ const updateUserProfile: RequestHandler = async (req, res) => {
 
 export const userController = {
   getUser,
+  getAllUsers,
   createUser,
   userLogin,
   updateUserProfile,
