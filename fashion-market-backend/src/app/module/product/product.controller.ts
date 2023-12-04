@@ -55,5 +55,7 @@ export const getAllProductsByName = async (req: any, res: any) => {
     res.status(200).json({
       data: product,
     });
-  } catch {}
+  } catch (err) {
+    console.log(err);
+  }
 };
