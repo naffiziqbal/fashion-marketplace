@@ -1,8 +1,8 @@
 
 const AddToCart = () => {
     return (
-        <div>
-            <button className="rounded-lg product__btn ">Add To Cart</button>
+        <div className="duration-700">
+            <button className="rounded-lg product__btn">Add To Cart</button>
         </div>
     );
 };

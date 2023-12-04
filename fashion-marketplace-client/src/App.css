@@ -37,9 +37,11 @@
   background-image: linear-gradient(to top right, #671ae4, #b75cff);
   min-width: 75%;
   padding: 0.75rem 1.5rem;
-  background-image: linear-gradient(to top right, #671ae4, #b75cff);
   font-size: 1rem;
   font-weight: 600;
+}
+.product__btn:hover {
+  background-image: linear-gradient(to top right, #6a27d6, #8c00ff);
 }
 
 @media (max-width: 640px) {
