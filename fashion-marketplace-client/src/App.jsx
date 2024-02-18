@@ -1,10 +1,8 @@
 
-import { useSelector } from "react-redux";
 import "./App.css";
 import MainLayout from "./components/Shared/Layout/MainLayout";
 
 function App() {
-
   return (
     <div
       style={{

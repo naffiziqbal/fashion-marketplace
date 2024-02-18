@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_APP_LOCAL_USER_API}`,
+    baseUrl: `${import.meta.env.VITE_APP_PRODUCTION_USER_API}`,
     headers: {
       authorization: `Bearer ${Cookies.get("accessToken")}`,
     },

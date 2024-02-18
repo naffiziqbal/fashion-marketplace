@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import style from "./UpdateProductModal.module.css";
 import { useEffect, useState } from "react";
 
-const UpdateUserModal = ({ isOpen, onClose, onSubmit }) => {
+const UpdateProfileModal = ({ isOpen, onClose, onSubmit }) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const [selectedImage, setSelectedImage] = useState(null);
@@ -73,4 +73,4 @@ const UpdateUserModal = ({ isOpen, onClose, onSubmit }) => {
     );
 };
 
-export default UpdateUserModal;
+export default UpdateProfileModal;

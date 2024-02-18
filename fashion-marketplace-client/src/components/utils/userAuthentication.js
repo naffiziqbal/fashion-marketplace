@@ -1,6 +1,6 @@
 const handleUserAuthentication = (user, route) => {
   const handleUserauth = new Promise((resolved, rejected) => {
-    fetch(`${import.meta.env.VITE_APP_LOCAL_USER_API}/${route}`, {
+    fetch(`${import.meta.env.VITE_APP_PRODUCTION_USER_API}${route}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

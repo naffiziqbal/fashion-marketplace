@@ -1,11 +1,11 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
-import UpdateUserModal from "../components/CustomModal/updateProfileModal/updateProfileModal";
 import { useSelector } from "react-redux";
 import Loading from "../components/ui/loading/Loading";
 import Cookies from 'js-cookie';
 import { useUpdateUserMutation } from '../redux/features/user/userApis';
 import useUserInfoFromDB from '../hooks/useUserInfoFromDB';
+import UpdateProfileModal from '../components/CustomModal/updateProfileModal/UpdateProfileModal';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,7 +75,7 @@ const Profile = () => {
 
                             </div>
                             <div className="flex justify-center items-center">
-                                <UpdateUserModal
+                                <UpdateProfileModal
                                     isOpen={isModalOpen}
                                     onClose={closeModal}
                                     onSubmit={handleSubmit} />

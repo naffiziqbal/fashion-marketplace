@@ -20,17 +20,14 @@ const Signup = () => {
     const from = location?.state?.from?.pathname || '/'
 
 
-
-    //  asapsd
     const user = useSelector(state => state.user)
+
 
     const handleFormSubmit = (data) => {
         dispatch(setLoading(true))
         const email = data.email;
         const password = data.password
-        //**Login Action From Redux 
         const user = { email, password }
-
         //Handle user Login
         const loginData = handleUserAuthentication(user, 'login')
 
@@ -49,13 +46,13 @@ const Signup = () => {
                         icon: 'success',
                         timer: 1500
                     })
-                    dispatch(setLoading(true))
+                    dispatch(setLoading(false))
                     navigate(from, { replace: true })
 
                 }
                 if (res.error) {
                     Swal.fire({
-                        title: `Oh nooooo!`,
+                        title: `Oh Nooooo!`,
                         text: res.error,
                         icon: 'error',
                         timer: 1500
