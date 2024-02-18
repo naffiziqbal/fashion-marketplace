@@ -8,6 +8,7 @@ import ProtectedRoutes from "./routerComponent/ProtectedRoutes";
 import CreateProduct from "../pages/CreateProduct";
 import UserLayout from "../components/Shared/Layout/userLayout/UserLayout";
 import Products from "../components/Dashboard/UserDashboard/Products";
+import Allproducts from "../pages/alll-products/Allproducts";
 // import ProtectedRoutes from "./protectedRoutes";
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/all-products",
+        element: <Allproducts />,
       },
       {
         path: '/create-product',

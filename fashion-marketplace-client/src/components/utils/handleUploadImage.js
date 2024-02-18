@@ -1,4 +1,4 @@
-const imgBBHostKey = import.meta.env.VITE_APP_imgbb_host_key;
+const imgBBHostKey = import.meta.env.VITE_APP_IMG_BB_HOST_KEY;
 
 const handleUploadImage = (formData) => {
   const uploadImage = new Promise((resolved, rejected) => {

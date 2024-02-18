@@ -39,7 +39,7 @@ const CreateProduct = () => {
                         creator_name: user ? user?.displayName : data?.creator_Name,
                         author_email: user ? user?.email : data?.author_email
                     }
-                    fetch(`${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}/create-product`, {
+                    fetch(`${import.meta.env.VITE_APP_PRODUCTION_PRODUCT_API}create-product`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"
@@ -48,6 +48,7 @@ const CreateProduct = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
+                            console.log(data)
                             if (data.success) {
                                 dispatch(setLoading(false))
                                 Swal.fire({
@@ -76,7 +77,7 @@ const CreateProduct = () => {
             }))
     }
     return (
-        <div className="my-12">
+        <div className="my-12 min-h-screen">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  duration-700">
                 <CreateProductModal
                     isOpen={isModalOpen}

@@ -9,7 +9,7 @@ const Footer = () => {
         <h2 className="text-3xl text-[#6C5DD3] my-5 font-bold">
           Fashion House
         </h2>
-        <p className="w-96 lg:w-full md:w-full">
+        <p className=" lg:w-full md:w-full w-fit">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi
           laboriosam necessitatibus sit magni quam! Eius autem repellendus animi
           impedit ad.

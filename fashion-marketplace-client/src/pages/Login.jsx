@@ -29,37 +29,45 @@ const Signup = () => {
         const password = data.password
         const user = { email, password }
         //Handle user Login
-        const loginData = handleUserAuthentication(user, 'login')
+        try {
+            const loginData = handleUserAuthentication(user, 'login')
 
-        // Returned Promise
-        loginData
-            .then(res => {
-                if (res.success) {
-                    Cookies.set('uid', res.data._id, { expires: 3 })
-                    Cookies.set('profile', res.data.userImg, { expires: 3 })
-                    Cookies.set('name', res.data.displayName, { expires: 3 })
-                    Cookies.set('accessToken', res.token, { expires: 3 })
-                    dispatch(setUser(res.data))
-                    Swal.fire({
-                        title: `Congratulations ${res?.data?.displayName}`,
-                        text: 'You have Been Signed In 👏👏🎉',
-                        icon: 'success',
-                        timer: 1500
-                    })
-                    dispatch(setLoading(false))
-                    navigate(from, { replace: true })
+            // Returned Promise
+            loginData
+                .then(res => {
+                    if (res.success) {
+                        Cookies.set('uid', res.data._id, { expires: 3 })
+                        Cookies.set('profile', res.data.userImg, { expires: 3 })
+                        Cookies.set('name', res.data.displayName, { expires: 3 })
+                        Cookies.set('accessToken', res.token, { expires: 3 })
+                        dispatch(setUser(res.data))
+                        Swal.fire({
+                            title: `Congratulations ${res?.data?.displayName}`,
+                            text: 'You have Been Signed In 👏👏🎉',
+                            icon: 'success',
+                            timer: 1500
+                        })
+                        dispatch(setLoading(false))
+                        navigate(from, { replace: true })
 
-                }
-                if (res.error) {
-                    Swal.fire({
-                        title: `Oh Nooooo!`,
-                        text: res.error,
-                        icon: 'error',
-                        timer: 1500
-                    })
-                }
+                    }
+                    if (res.error) {
+                        Swal.fire({
+                            title: `Oh Nooooo!`,
+                            text: res.error,
+                            icon: 'error',
+                            timer: 1500
+                        })
+                    }
+                })
+        } catch (error) {
+            Swal.fire({
+                title: `Oh Nooooo!`,
+                text: error.message,
+                icon: 'error',
+                timer: 1500
             })
-        dispatch(setLoading(false))
+        }
     }
 
     return (

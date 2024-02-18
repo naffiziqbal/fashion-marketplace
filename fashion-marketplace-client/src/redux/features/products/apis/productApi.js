@@ -10,7 +10,7 @@ const developmentUrl = `${import.meta.env.VITE_APP_LOCAL_PRODUCT_API}`;
 
 export const productApis = createApi({
   reducerPath: "productApi",
-  baseQuery: fetchBaseQuery({
+  baseQuery: fetchBaseQuery({ 
     baseUrl: ` ${productionUrl}`,
   }),
   endpoints: (builder) => ({

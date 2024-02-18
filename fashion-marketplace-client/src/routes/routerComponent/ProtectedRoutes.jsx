@@ -20,9 +20,9 @@ const ProtectedRoutes = ({ children }) => {
         return <Loading />
     }
 
-    if (user === undefined) {
-        handleLogOut()
-    }
+    // if (user === undefined) {
+    //     handleLogOut()
+    // }
 
     return <Navigate to={'/login'} state={{ from: location }} replace />
 
